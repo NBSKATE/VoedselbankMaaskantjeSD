@@ -6,6 +6,6 @@ define('DB_NAME', 'mvc-2109a');
 
 define('APPROOT', dirname(dirname(__FILE__)));
 
-define('URLROOT', 'http://mvc-framework-p2.com');
+define('URLROOT', 'http://voedselbankmaaskantje.com');
 
-define('SITENAME', 'mvc-2109a');
+define('SITENAME', 'Voedselbank Maaskantje');

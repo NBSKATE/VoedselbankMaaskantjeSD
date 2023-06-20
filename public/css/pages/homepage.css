@@ -1,0 +1,98 @@
+body {
+    height: 100vh;
+    overflow: hidden;
+    width: 100%;
+    /* height: 100%; */
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to bottom, #f7f7f7, #e5e5e5);
+}
+.container {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+overflow:hidden;
+position:relative;
+}
+
+.navigation {
+    background-color: transparent;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+
+}
+
+h1 {
+    font-size: 120px;
+    text-transform: uppercase;
+    font-family: 'Gambetta', serif;
+    letter-spacing: -3px;
+    transition: 700ms ease;
+    font-variation-settings: "wght" 311;
+    margin-bottom: 0.8rem;
+    color: PaleGoldenRod;
+    outline: none;
+    text-align: center;
+}
+h1:hover {
+    transform: scale(1.5);
+}
+h2 {
+    font-size: 40px;
+    text-transform: uppercase;
+    font-family: 'Gambetta', serif;
+    letter-spacing: -3px;
+    transition: 700ms ease;
+    font-variation-settings: "wght" 311;
+    margin-bottom: 0.8rem;
+    color: PaleGoldenRod;
+    outline: none;
+    text-align: center;
+}
+
+.content {
+    text-align: center;
+    color: #FFF;
+    font-size: 3em;
+    font-weight: bold;
+    text-shadow: 3px 2px 100px #000;
+    animation: fadeIn 2s ease-in-out;
+z-index: 1;
+}
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+.background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('https://www.rtlnieuws.nl/sites/default/files/content/images/2022/08/07/ANP-450041168.jpg?itok=GgFGqpWR&offsetX=0&offsetY=97&cropWidth=1023&cropHeight=575&width=2048&height=1152&impolicy=dynamic');
+    background-size: cover;
+    filter: blur(5px);
+    animation: slowly 20s linear infinite;
+background-position: 50% 40%;
+}
+@keyframes slowly {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
