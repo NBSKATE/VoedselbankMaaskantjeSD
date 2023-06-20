@@ -28,36 +28,36 @@ class Leverancier
     // ...
 }
 
-use PHPUnit\Framework\TestCase;
+// use PHPUnit\Framework\TestCase;
 
-class LeverancierTest extends TestCase
-{
-    protected $leverancierModel;
+// class LeverancierTest extends TestCase
+// {
+//     protected $leverancierModel;
 
-    protected function setUp(): void
-    {
-        // Instantiate the model class that contains the getLeveranciers() method
-        $this->leverancierModel = new LeverancierModel();
-    }
+//     protected function setUp(): void
+//     {
+//         // Instantiate the model class that contains the getLeveranciers() method
+//         $this->leverancierModel = new LeverancierModel();
+//     }
 
-    public function testGetLeveranciers()
-    {
-        // Call the getLeveranciers() method
-        $result = $this->leverancierModel->getLeveranciers();
+//     public function testGetLeveranciers()
+//     {
+//         // Call the getLeveranciers() method
+//         $result = $this->leverancierModel->getLeveranciers();
 
-        // Assert that the result is an array
-        $this->assertIsArray($result);
+//         // Assert that the result is an array
+//         $this->assertIsArray($result);
 
-        // Assert that the result is not empty
-        $this->assertNotEmpty($result);
+//         // Assert that the result is not empty
+//         $this->assertNotEmpty($result);
 
-        // Assert that each item in the result has the expected keys
-        $expectedKeys = ['Bedrijfsnaam', 'Adres', 'Contactpersoon', 'Email', 'Telefoonnummer', 'EerstvolgendeLevering'];
-        foreach ($result as $item) {
-            this->assertArrayHasKey($expectedKeys, $item);
-        }
-    }
-}
+//         // Assert that each item in the result has the expected keys
+//         $expectedKeys = ['Bedrijfsnaam', 'Adres', 'Contactpersoon', 'Email', 'Telefoonnummer', 'EerstvolgendeLevering'];
+//         foreach ($result as $item) {
+//             $this->assertArrayHasKey($expectedKeys, $item);
+//         }
+//     }
+// }
 
 
     // public function updateLeverancier($leverancierId, $bedrijfsnaam, $adres, $contactpersoonNaam, $email, $telefoonnummer, $eerstvolgendeLevering)

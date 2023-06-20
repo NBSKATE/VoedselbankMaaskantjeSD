@@ -38,32 +38,32 @@ class Leveranciers extends Controller
         $this->view('leverancier/index', $data);
     }
 
-    public function create()
-    {
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            // Retrieve the form data
-            $leverancierData = [
-                'bedrijfsnaam' => $_POST['bedrijfsnaam'],
-                'adres' => $_POST['adres'],
-                'contactpersoon' => $_POST['contactpersoon'],
-                'email' => $_POST['email'],
-                'telefoonnummer' => $_POST['telefoonnummer'],
-                'eerstvolgendeLevering' => $_POST['eerstvolgendeLevering']
-            ];
+//     public function create()
+//     {
+//         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+//             // Retrieve the form data
+//             $leverancierData = [
+//                 'bedrijfsnaam' => $_POST['bedrijfsnaam'],
+//                 'adres' => $_POST['adres'],
+//                 'contactpersoon' => $_POST['contactpersoon'],
+//                 'email' => $_POST['email'],
+//                 'telefoonnummer' => $_POST['telefoonnummer'],
+//                 'eerstvolgendeLevering' => $_POST['eerstvolgendeLevering']
+//             ];
 
-            // Add the new leverancier using the model
-            $added = $this->leverancierModel->addLeverancier($leverancierData);
+//             // Add the new leverancier using the model
+//             $added = $this->leverancierModel->addLeverancier($leverancierData);
 
-            if ($added) {
-                // Success message
-                echo "Leverancier toegevoegd!";
-            } else {
-                // Error message
-                echo "Fout bij toevoegen van leverancier.";
-            }
-        } else {
-            // Display the create leverancier form
-            $this->view('leverancier/create', $data);
-        }
-    }
-}
+//             if ($added) {
+//                 // Success message
+//                 echo "Leverancier toegevoegd!";
+//             } else {
+//                 // Error message
+//                 echo "Fout bij toevoegen van leverancier.";
+//             }
+//         } else {
+//             // Display the create leverancier form
+//             $this->view('leverancier/create', $data);
+//         }
+//     }
+ }
