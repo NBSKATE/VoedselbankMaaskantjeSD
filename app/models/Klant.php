@@ -92,7 +92,7 @@ class Klant
         $this->db->bind(':Babies', $post['Babies'], PDO::PARAM_INT);
         return $this->db->execute();
     }
-
+  
     // public function createKlant($post)
     // {
     //     $query = "INSERT INTO klant (Naam, Tussenvoegsel, Achternaam, Volwassenen, Kinderen, Babies, DatumAangemaakt, DatumGewijzigd)
