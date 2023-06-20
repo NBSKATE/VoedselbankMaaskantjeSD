@@ -2,7 +2,7 @@
 <p><?= $data['sayHello']; ?></p>
 <ul>
     <li>
-        <a href="<?= URLROOT; ?>/countries/index">show countries</a>
+        <a href="<?= URLROOT; ?>/klanten/index">toon klanten</a>
     </li>
     <li>
         <a href="<?= URLROOT; ?>/lessen/index">Lesrooster weergeven</a>
