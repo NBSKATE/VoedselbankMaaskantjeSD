@@ -1,5 +1,5 @@
-<h3><?= $data['title'] ?></h3>
-<a href="<?= URLROOT ?>/countries/create">Nieuw record</a>
+<?php echo $data["title"];?>
+<a href="<?=URLROOT;?>/countries/create">Nieuw record</a>
 <table>
     <thead>
         <th>Id</th>
@@ -14,4 +14,4 @@
         <?= $data['rows']; ?>
     </tbody>
 </table>
-<p><a href="<?= URLROOT; ?>/landingpages/index">back to landingpage</a></p>
+<p><a href="<?=URLROOT;?>/landingpages/index">back to landingpage</a></p>

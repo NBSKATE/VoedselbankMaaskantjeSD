@@ -1,6 +1,15 @@
-<h3><?= $data['title'];?></h3>
+<?php
+$data = []; // Initialize an empty array
 
-<form action="<?=URLROOT;?>/countries/create" method="post">
+// Assign values to the $data array
+$data['title'] = "Samenstellen van de voedselpakket";
+$data['rows'] = "<tr>...</tr>"; // Replace this with the actual rows
+
+?>
+
+<h3><?= $data['title']; ?></h3>
+
+<form action="<?= URLROOT ?>/voedselpakket/create" method="post">
     <table>
         <tbody>
             <tr>
@@ -24,5 +33,4 @@
             </tr>
         </tbody>
     </table>
-
 </form>

@@ -2,10 +2,13 @@
 define('DB_HOST', 'localhost');
 define('DB_USER', 'root');
 define('DB_PASS', '');
-define('DB_NAME', 'mvc-2109a');
+define('DB_NAME', 'VoedselbankSql');
 
 define('APPROOT', dirname(dirname(__FILE__)));
 
-define('URLROOT', 'http://mvc-framework-p2.com');
+define('URLROOT', 'http://voedselbankkaaskantje.com');
 
-define('SITENAME', 'mvc-2109a');
+define('SITENAME', 'Examen 2023');
+
+define('DTZ', new DateTimeZone('Europe/Amsterdam'));
+?>

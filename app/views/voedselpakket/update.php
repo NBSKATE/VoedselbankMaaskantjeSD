@@ -1,6 +1,6 @@
-<h3><?= $data['title'];?></h3>
+<?php echo $data["title"]; ?>
 
-<form action="<?=URLROOT;?>/countries/update" method="post">
+<form action="<?=URLROOT;?>/voedselpakket/update" method="post">
     <table>
         <tbody>
             <tr>
@@ -8,7 +8,7 @@
                 <td><input type="text" name="name" id="name" value="<?= $data['Name']; ?>"></td>
             </tr>
             <tr>
-                <td>Hoofstad:</td>
+                <td>Hoofdstad:</td>
                 <td><input type="text" name="capitalCity" id="capitalCity" value="<?= $data['CapitalCity']; ?>"></td>
             </tr>
             <tr>
@@ -25,5 +25,4 @@
             </tr>
         </tbody>
     </table>
-
 </form>
