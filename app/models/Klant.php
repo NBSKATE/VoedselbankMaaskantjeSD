@@ -93,22 +93,27 @@ class Klant
     //     $this->db->bind(':Babies', $post['Babies'], PDO::PARAM_INT);
     //     return $this->db->execute();
     // }
+
     public function createKlant($post)
     {
         $query = "INSERT INTO klant (Naam, Tussenvoegsel, Achternaam, Volwassenen, Kinderen, Babies, DatumAangemaakt, DatumGewijzigd)
                   VALUES (:Naam, :Tussenvoegsel, :Achternaam, :Volwassenen, :Kinderen, :Babies, SYSDATE(), SYSDATE())";
 
-        $statement = $this->db->prepare($query);
+        $params = [
+            ':Naam' => $post['Naam'],
+            ':Tussenvoegsel' => $post['Tussenvoegsel'],
+            ':Achternaam' => $post['Achternaam'],
+            ':Volwassenen' => $post['Volwassenen'],
+            ':Kinderen' => $post['Kinderen'],
+            ':Babies' => $post['Babies']
+        ];
 
-        $statement->bindValue(':Naam', $post['Naam']);
-        $statement->bindValue(':Tussenvoegsel', $post['Tussenvoegsel']);
-        $statement->bindValue(':Achternaam', $post['Achternaam']);
-        $statement->bindValue(':Volwassenen', $post['Volwassenen']);
-        $statement->bindValue(':Kinderen', $post['Kinderen']);
-        $statement->bindValue(':Babies', $post['Babies']);
+        $this->db->query($query);
 
-        $result = $statement->execute();
+        foreach ($params as $param => $value) {
+            $this->db->bind($param, $value);
+        }
 
-        return $result;
+        return $this->db->execute();
     }
 }
