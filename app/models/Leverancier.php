@@ -52,7 +52,7 @@ class LeverancierTest extends TestCase
         $this->assertNotEmpty($result);
 
         // Assert that each item in the result has the expected keys
-        $expectedKeys = ['Bedrijfsnaam', '', 'Contactpersoon', 'Email', 'Telefoonnummer', 'EerstvolgendeLevering'];
+        $expectedKeys = ['Bedrijfsnaam', 'Adres', 'Contactpersoon', 'Email', 'Telefoonnummer', 'EerstvolgendeLevering'];
         foreach ($result as $item) {
             $this->assertArrayHasKey($expectedKeys, $item);
         }
