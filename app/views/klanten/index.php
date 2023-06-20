@@ -19,7 +19,7 @@
 <body>
     <div class="container">
         <div class="row">
-            <h1>Overzicht van voedselpakketten</h1>
+            <h1>Overzicht van klanten</h1>
         </div>
         <div class="row">
             <div class="col">
@@ -33,15 +33,19 @@
                             <th>Volwassenen</th>
                             <th>Kinderen</th>
                             <th>Babies</th>
-                            <th>Update</th>
-                            <th>Delete</th>
+                            <th>Telefoon</th>
+                            <th>Email</th>
+                            <th>Straatnaam</th>
+                            <th>Huisnr</th>
+                            <th>Toevoeging</th>
+                            <th>Postcode</th>
+                            <th>Plaats</th>
                         </tr>
                     </thead>
                     </tbody>
                     <?= $data['rows']; ?>
                 </table>
             </div>
-            <a href="create.php" style="padding-top: 10px;"><button type="button" class="btn btn-secondary">Voedselpakket samenstellen</button></a>
         </div>
     </div>
 

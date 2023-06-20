@@ -64,13 +64,14 @@ CREATE TABLE `klant` (
     `Volwassenen` INT NOT NULL,
     `Kinderen` INT NULL,
     `Babies` INT NULL,
+	`Wens` VARCHAR(255) NULL,
     `IsActief` BIT NOT NULL,
     `Opmerking` VARCHAR(255) NULL,
     `DatumAangemaakt` DATETIME NOT NULL,
     `DatumGewijzigd` DATETIME NOT NULL,
-    PRIMARY KEY (`Id`),
-    FOREIGN KEY (`AdresId`) REFERENCES `adres` (`Id`),
-    FOREIGN KEY (`KlantContactId`) REFERENCES `contact` (`Id`)
+    PRIMARY KEY (`Id`)
+    -- FOREIGN KEY (`AdresId`) REFERENCES `adres` (`Id`),
+    -- FOREIGN KEY (`KlantContactId`) REFERENCES `contact` (`Id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
@@ -119,8 +120,8 @@ CREATE TABLE `voedselpakket` (
     `Opmerking` VARCHAR(255) NULL,
     `DatumAangemaakt` DATETIME NOT NULL,
     `DatumGewijzigd` DATETIME NOT NULL,
-    PRIMARY KEY (`Id`),
-    FOREIGN KEY (`KlantId`) REFERENCES `klant` (`Id`)
+    PRIMARY KEY (`Id`)
+   --  FOREIGN KEY (`KlantId`) REFERENCES `klant` (`Id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE `productenVoedselpakket` (
@@ -180,13 +181,13 @@ VALUES
     ('categorie5', 1, NULL, SYSDATE(), SYSDATE());
 
 -- Insert values into the `klant` table
-INSERT INTO `klant` (`Naam`, `Tussenvoegsel`, `Achternaam`, `AdresId`, `KlantContactId`, `Volwassenen`, `Kinderen`, `Babies`, `IsActief`, `Opmerking`, `DatumAangemaakt`, `DatumGewijzigd`)
+INSERT INTO `klant` (`Naam`, `Tussenvoegsel`, `Achternaam`, `AdresId`, `KlantContactId`, `Volwassenen`, `Kinderen`, `Babies`, `Wens`, `IsActief`, `Opmerking`, `DatumAangemaakt`, `DatumGewijzigd`)
 VALUES
-    ('klant1', NULL, 'achternaam1', 1, 1, 2, 1, 0, 1, NULL, SYSDATE(), SYSDATE()),
-    ('klant2', NULL, 'achternaam2', 2, 2, 1, 0, 0, 1, NULL, SYSDATE(), SYSDATE()),
-    ('klant3', 'van der', 'achternaam3', 3, 3, 2, 2, 1, 1, NULL, SYSDATE(), SYSDATE()),
-    ('klant4', NULL, 'achternaam4', 4, 4, 2, 0, 0, 1, NULL, SYSDATE(), SYSDATE()),
-    ('klant5', 'zo', 'achternaam5', 5, 5, 1, 0, 1, 1, NULL, SYSDATE(), SYSDATE());
+    ('klant1', NULL, 'achternaam1', 1, 1, 2, 1, 0,'geen varkensvlees', 1, NULL, SYSDATE(), SYSDATE()),
+    ('klant2', NULL, 'achternaam2', 2, 2, 1, 0, 0,'allergie pindas ', 1, NULL, SYSDATE(), SYSDATE()),
+    ('klant3', 'van der', 'achternaam3', 3, 3, 2, 2, 1,'vegetarisch', 1, NULL, SYSDATE(), SYSDATE()),
+    ('klant4', NULL, 'achternaam4', 4, 4, 2, 0, 0, NULL, 1, NULL, SYSDATE(), SYSDATE()),
+    ('klant5', 'zo', 'achternaam5', 5, 5, 1, 0, 1,'Veganistisch', 1, NULL, SYSDATE(), SYSDATE());
 
 -- Insert values into the `leverancier` table
 INSERT INTO `leverancier` (`Bedrijfsnaam`, `AdresId`, `EerstvolgendeLeveringDatumEnTijd`, `ContactId`, `Btwnummer`, `Kvknummer`, `IsActief`, `Opmerking`, `DatumAangemaakt`, `DatumGewijzigd`)
@@ -224,67 +225,3 @@ VALUES
     (4, 2, 2, 1, NULL, SYSDATE(), SYSDATE()),
     (5, 1, 3, 1, NULL, SYSDATE(), SYSDATE());
 
-
-
--- stored procedure code for klant and leverancier
-DELIMITER $$
-
-CREATE PROCEDURE `AddKlant`(
-    IN p_Naam VARCHAR(255),
-    IN p_AdresId INT UNSIGNED,
-    IN p_KlantContactId INT UNSIGNED,
-    IN p_Volwassenen INT,
-    IN p_Kinderen INT,
-    IN p_Babies INT,
-    IN p_IsActief BIT,
-    IN p_Opmerking VARCHAR(255)
-)
-BEGIN
-    DECLARE v_KlantId INT UNSIGNED;
-    DECLARE v_DatumAangemaakt DATETIME;
-    
-    SET v_DatumAangemaakt = SYSDATE();
-    
-    -- Insert into klant table
-    INSERT INTO klant (Naam, AdresId, KlantContactId, Volwassenen, Kinderen, Babies, IsActief, Opmerking, DatumAangemaakt, DatumGewijzigd)
-    VALUES (p_Naam, p_AdresId, p_KlantContactId, p_Volwassenen, p_Kinderen, p_Babies, p_IsActief, p_Opmerking, v_DatumAangemaakt, v_DatumAangemaakt);
-    
-    SET v_KlantId = LAST_INSERT_ID();
-    
-    -- Update foreign key in adres table
-    UPDATE adres SET KlantId = v_KlantId WHERE Id = p_AdresId;
-    
-    -- Update foreign key in contact table
-    UPDATE contact SET KlantId = v_KlantId WHERE Id = p_KlantContactId;
-END $$
-
-
-CREATE PROCEDURE `AddLeverancier`(
-    IN p_Bedrijfsnaam VARCHAR(255),
-    IN p_AdresId INT UNSIGNED,
-    IN p_EerstvolgendeLeveringDatumEnTijd DATETIME,
-    IN p_ContactId INT UNSIGNED,
-    IN p_Btwnummer VARCHAR(255),
-    IN p_Kvknummer INT,
-    IN p_IsActief BIT,
-    IN p_Opmerking VARCHAR(255)
-)
-BEGIN
-    DECLARE v_LeverancierId INT UNSIGNED;
-    DECLARE v_DatumAangemaakt DATETIME;
-    
-    SET v_DatumAangemaakt = SYSDATE();
-    
-    -- Insert into leverancier table
-    INSERT INTO leverancier (Bedrijfsnaam, AdresId, EerstvolgendeLeveringDatumEnTijd, ContactId, Btwnummer, Kvknummer, IsActief, Opmerking, DatumAangemaakt, DatumGewijzigd)
-    VALUES (p_Bedrijfsnaam, p_AdresId, p_EerstvolgendeLeveringDatumEnTijd, p_ContactId, p_Btwnummer, p_Kvknummer, p_IsActief, p_Opmerking, v_DatumAangemaakt, v_DatumAangemaakt);
-    
-    SET v_LeverancierId = LAST_INSERT_ID();
-    
-    -- Update foreign key in adres table
-    UPDATE adres SET LeverancierId = v_LeverancierId WHERE Id = p_AdresId;
-    
-    -- Update foreign key in contact table
-    UPDATE contact SET LeverancierId = v_LeverancierId WHERE Id = p_ContactId;
-END $$
-DELIMITER ;

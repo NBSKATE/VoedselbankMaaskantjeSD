@@ -17,7 +17,15 @@ class Klant
 
     public function getKlanten()
     {
-        $this->db->query('SELECT * FROM klant');
+        $this->db->query('SELECT klant.Id, klant.Naam, klant.Tussenvoegsel, klant.Achternaam, klant.Volwassenen, klant.Kinderen, klant.Babies, klant.Wens, 
+        adres.Straatnaam, adres.Huisnummer, adres.Toevoeging, adres.Postcode, adres.Plaats, contact.Telefoon, contact.Email
+        FROM klant
+        JOIN adres ON klant.AdresId = adres.Id
+        JOIN contact ON klant.KlantContactId = contact.Id;');
+
+        // $this->db->bind(':klantId', $klantId);
+
+
         return $this->db->resultSet();
     }
 

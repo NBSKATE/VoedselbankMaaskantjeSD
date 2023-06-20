@@ -27,6 +27,13 @@ class Klanten extends Controller
                         <td>$items->Volwassenen</td>
                         <td>$items->Kinderen</td>
                         <td>$items->Babies</td>
+                        <td>$items->Telefoon</td>
+                        <td>$items->Email</td>
+                        <td>$items->Straatnaam</td>
+                        <td>$items->Huisnummer</td>
+                        <td>$items->Toevoeging</td>
+                        <td>$items->Postcode</td>
+                        <td>$items->Plaats</td>
 
                         <td>
                             <a href='" . URLROOT . "/klanten/update/$items->Id'>update</a>
@@ -70,7 +77,7 @@ class Klanten extends Controller
             'Achternaam' => $record->Achternaam,
             'Volwassenen' => $record->Volwassenen,
             'Kinderen' => $record->Kinderen,
-            'Babies' => $record->Babies
+            'Babies' => $record->Babies,
         ];
         $this->view('klanten/update', $data);
     }
