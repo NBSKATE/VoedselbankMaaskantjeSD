@@ -57,11 +57,14 @@ CREATE TABLE `categorie` (
 CREATE TABLE `klant` (
     `Id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
     `Naam` VARCHAR(255) NOT NULL,
+	`Tussenvoegsel` VARCHAR(255) NULL,
+	`Achternaam` VARCHAR(255) NOT NULL,
     `AdresId` INT UNSIGNED NOT NULL,
     `KlantContactId` INT UNSIGNED NOT NULL,
     `Volwassenen` INT NOT NULL,
     `Kinderen` INT NULL,
     `Babies` INT NULL,
+	`Wens` VARCHAR(255) NULL,
     `IsActief` BIT NOT NULL,
     `Opmerking` VARCHAR(255) NULL,
     `DatumAangemaakt` DATETIME NOT NULL,
@@ -175,21 +178,16 @@ VALUES
     ('categorie2', 1, NULL, SYSDATE(), SYSDATE()),
     ('categorie3', 1, NULL, SYSDATE(), SYSDATE()),
     ('categorie4', 1, NULL, SYSDATE(), SYSDATE()),
-    ('categorie5', 1, NULL, SYSDATE(), SYSDATE()),
-	('categorie6', 1, NULL, SYSDATE(), SYSDATE()),
-	('categorie7', 1, NULL, SYSDATE(), SYSDATE()),
-	('categorie8', 1, NULL, SYSDATE(), SYSDATE()),
-	('categorie9', 1, NULL, SYSDATE(), SYSDATE()),
-	('categorie10', 1, NULL, SYSDATE(), SYSDATE());
+    ('categorie5', 1, NULL, SYSDATE(), SYSDATE());
 
 -- Insert values into the `klant` table
-INSERT INTO `klant` (`Naam`, `AdresId`, `KlantContactId`, `Volwassenen`, `Kinderen`, `Babies`, `IsActief`, `Opmerking`, `DatumAangemaakt`, `DatumGewijzigd`)
+INSERT INTO `klant` (`Naam`, `Tussenvoegsel`, `Achternaam`, `AdresId`, `KlantContactId`, `Volwassenen`, `Kinderen`, `Babies`, `Wens`, `IsActief`, `Opmerking`, `DatumAangemaakt`, `DatumGewijzigd`)
 VALUES
-    ('klant1', 1, 1, 2, 1, 0, 1, NULL, SYSDATE(), SYSDATE()),
-    ('klant2', 2, 2, 1, 0, 0, 1, NULL, SYSDATE(), SYSDATE()),
-    ('klant3', 3, 3, 2, 2, 1, 1, NULL, SYSDATE(), SYSDATE()),
-    ('klant4', 4, 4, 2, 0, 0, 1, NULL, SYSDATE(), SYSDATE()),
-    ('klant5', 5, 5, 1, 0, 1, 1, NULL, SYSDATE(), SYSDATE());
+    ('klant1', NULL, 'achternaam1', 1, 1, 2, 1, 0,'geen varkensvlees', 1, NULL, SYSDATE(), SYSDATE()),
+    ('klant2', NULL, 'achternaam2', 2, 2, 1, 0, 0,'allergie pindas ', 1, NULL, SYSDATE(), SYSDATE()),
+    ('klant3', 'van der', 'achternaam3', 3, 3, 2, 2, 1,'vegetarisch', 1, NULL, SYSDATE(), SYSDATE()),
+    ('klant4', NULL, 'achternaam4', 4, 4, 2, 0, 0, NULL, 1, NULL, SYSDATE(), SYSDATE()),
+    ('klant5', 'zo', 'achternaam5', 5, 5, 1, 0, 1,'Veganistisch', 1, NULL, SYSDATE(), SYSDATE());
 
 -- Insert values into the `leverancier` table
 INSERT INTO `leverancier` (`Bedrijfsnaam`, `AdresId`, `EerstvolgendeLeveringDatumEnTijd`, `ContactId`, `Btwnummer`, `Kvknummer`, `IsActief`, `Opmerking`, `DatumAangemaakt`, `DatumGewijzigd`)
