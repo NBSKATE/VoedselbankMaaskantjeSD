@@ -1,61 +1,31 @@
 <?php
-  class Les {
+
+/**
+ * Dit is de model voor de controller Countries
+ */
+
+class Les
+{
+    //properties
     private $db;
 
-    public function __construct() {
-      $this->db = new Database();
+    // Dit is de constructor van de Country model class
+    public function __construct()
+    {
+        $this->db = new Database();
     }
 
-    public function getMyLessons() 
+    public function getLessen()
     {
-        $this->db->query("SELECT Les.*
-                                 ,Instructeur.*
-                                 ,Leerling.*
-                                 ,Les.Id
-                                 ,Instructeur.Naam as INSN
+        $this->db->query("SELECT Les.DatumTijd
+                                ,Les.Id
+                                ,Leerling.Id
+                                ,Leerling.Naam
                           FROM Les
-                          INNER JOIN Instructeur
-                          ON Instructeur.Id = Les.InstructeurId
-                          INNER JOIN Leerling 
+                          INNER JOIN Leerling
                           ON Leerling.Id = Les.LeerlingId
-                          WHERE Instructeur.Id = :Id;");
-                          
-        $this->db->bind(':Id', 2);
-  
-        $result = $this->db->resultSet();
-  
-        return $result;
-    }
-
-    public function getTopicsLessons($lessonId)
-    {
-        $this->db->query("SELECT Les.*
-                                ,Onderwerp.*
-                          FROM Onderwerp
-                          INNER JOIN Les
-                          ON Les.Id = Onderwerp.LesId                          
-                          WHERE Onderwerp.LesId = :lessonId");
-        
-        $this->db->bind(':lessonId', $lessonId);
-       
+                          WHERE Les.InstructeurId = :Id");
+        $this->db->bind(':Id', 2, PDO::PARAM_INT);
         return $this->db->resultSet();
     }
-
-    public function addTopic($post)
-    {
-        // var_dump($post);
-        $sql = "INSERT INTO Onderwerp (Id
-                                      ,LesId
-                                      ,Onderwerp)
-                VALUES                (NULL
-                                      ,:lesId
-                                      ,:topic);";
-
-        $this->db->query($sql);
-        $this->db->bind(':lesId', $post['lesId'], PDO::PARAM_INT);
-        $this->db->bind(':topic', $post['topic'], PDO::PARAM_STR);
-        return $this->db->execute();
-    }
-  }
-
-?>
+}

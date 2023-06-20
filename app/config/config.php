@@ -1,15 +1,11 @@
 <?php
 define('DB_HOST', 'localhost');
-define('DB_USER', 'rra1968');
-define('DB_PASS', 'iKhNZtDLzoC7yROC');
-define('DB_NAME', 'mvc-2109C');
+define('DB_USER', 'root');
+define('DB_PASS', '');
+define('DB_NAME', 'mvc-2109a');
 
-define('APPROOT', dirname(dirname(__FILE__))) ;
+define('APPROOT', dirname(dirname(__FILE__)));
 
+define('URLROOT', 'http://mvc-framework-p2.com');
 
-define('URLROOT', 'http://www.mvc-2109c.org');
-
-define('SITENAME', 'MVC-2019C');
-
-define('DTZ', new DateTimeZone('Europe/Amsterdam'));
-?>
+define('SITENAME', 'mvc-2109a');

@@ -1,16 +1,17 @@
-<?php echo $data["title"]; ?>
-
+<h3><?= $data['title'] ?></h3>
+<a href="<?= URLROOT ?>/countries/create">Nieuw record</a>
 <table>
-  <thead>
-    <th>id</th>
-    <th>Land</th>
-    <th>hoofdstad</th>
-    <th>continent</th>
-    <th>aantalinwoners</th>
-  </thead>
-  <tbody>
-    <?=$data['countries']?>
-  </tbody>
+    <thead>
+        <th>Id</th>
+        <th>Naam</th>
+        <th>Hooftstad</th>
+        <th>Continent</th>
+        <th>Aantal Inwoners</th>
+        <th>Update</th>
+        <th>Delete</th>
+    </thead>
+    <tbody>
+        <?= $data['rows']; ?>
+    </tbody>
 </table>
-<a href="<?=URLROOT;?>/homepages/index">terug</a>
-
+<p><a href="<?= URLROOT; ?>/landingpages/index">back to landingpage</a></p>
