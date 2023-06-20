@@ -41,6 +41,7 @@ class Klanten extends Controller
                         <td>
                             <a href='" . URLROOT . "/klanten/delete/$items->Id'>delete</a>
                         </td>
+                        
                       </tr>";
         }
 

@@ -28,7 +28,7 @@
                         <tr>
                             <th>Id</th>
                             <th>Naam</th>
-                            <th>Tussenvoegsel</th>
+                            <th>Voegsel</th>
                             <th>Achternaam</th>
                             <th>Volwassenen</th>
                             <th>Kinderen</th>
@@ -40,6 +40,9 @@
                             <th>Toevoeging</th>
                             <th>Postcode</th>
                             <th>Plaats</th>
+                            <td>
+                                <a href="<?php echo URLROOT; ?>/klanten/create">create</a>
+                            </td>
                         </tr>
                     </thead>
                     </tbody>

@@ -17,13 +17,13 @@
             </tr>
             <tr>
                 <td>Volwassenen:</td>
-                <td><input type="text" name="Volwassenen" id="Volwassenen"></td>
+                <td><input type="number" name="Volwassenen" id="Volwassenen"></td>
             </tr>
             <td>Kinderen:</td>
-            <td><input type="text" name="Kinderen" id="Kinderen"></td>
+            <td><input type="number" name="Kinderen" id="Kinderen"></td>
             </tr>
             <td>Babies:</td>
-            <td><input type="text" name="Babies" id="Babies"></td>
+            <td><input type="number" name="Babies" id="Babies"></td>
             </tr>
             <tr>
                 <td><input type="submit" name="submit" id="submit" value="Verstuur"></td>

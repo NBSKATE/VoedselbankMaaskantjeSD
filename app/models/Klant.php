@@ -36,24 +36,27 @@ class Klant
         return $this->db->single();
     }
 
-    // public function updateKlant($data)
-    // {
-    //     // var_dump($data);exit();
-    //     $this->db->query("UPDATE Country
-    //                       SET Name = :Name,
-    //                           CapitalCity = :CapitalCity,
-    //                           Continent = :Continent,
-    //                           Population = :Population
-    //                       WHERE Id = :Id");
+    public function updateKlant($data)
+    {
+        // var_dump($data);exit();
+        $this->db->query("UPDATE klant
+                          SET Naam = :Naam,
+                              Achternaam = :Achternaam,
+                              Tussenvoegsel = :Tussenvoegsel,
+                              Volwassenen = :Volwassenen,
+                              Kinderen = :Kinderen,
+                              Babies = :Babies
+                          WHERE Id = :Id");
 
-    //     $this->db->bind(':Name', $data['name'], PDO::PARAM_STR);
-    //     $this->db->bind(':CapitalCity', $data['capitalCity'], PDO::PARAM_STR);
-    //     $this->db->bind(':Continent', $data['continent'], PDO::PARAM_STR);
-    //     $this->db->bind(':Population', $data['population'], PDO::PARAM_INT);
-    //     $this->db->bind(':Id', $data['id'], PDO::PARAM_INT);
+        $this->db->bind(':Naam', $data['Naam'], PDO::PARAM_STR);
+        $this->db->bind(':Achternaam', $data['Achternaam'], PDO::PARAM_STR);
+        $this->db->bind(':Tussenvoegsel', $data['Tussenvoegsel'], PDO::PARAM_STR);
+        $this->db->bind(':Kinderen', $data['Kinderen'], PDO::PARAM_INT);
+        $this->db->bind(':Babies', $data['Babies'], PDO::PARAM_INT);
+        $this->db->bind(':Id', $data['id'], PDO::PARAM_INT);
 
-    //     return $this->db->execute();
-    // }
+        return $this->db->execute();
+    }
 
     public function deleteKlant($id)
     {
@@ -66,21 +69,46 @@ class Klant
 
     // public function createKlant($post)
     // {
-    //     $this->db->query("INSERT INTO country (Id, 
-    //                                            Name, 
-    //                                            CapitalCity, 
-    //                                            Continent, 
-    //                                            Population)
+    //     $this->db->query("INSERT INTO klant (Id, 
+    //                                            Naam, 
+    //                                            Tussenvoegsel, 
+    //                                            Achternaam, 
+    //                                            Volwassenen,
+    //                                            Kinderen,
+    //                                            Babies
+    //                                            )
     //                       VALUES              (:Id,
-    //                                            :Name,
-    //                                            :CapitalCity,
-    //                                            :Continent,
-    //                                            :Population)");
+    //                                            :Naam,
+    //                                            :Tussenvoegsel,
+    //                                            :Achternaam,
+    //                                            :Volwassenen,
+    //                                            :Kinderen,
+    //                                            :Babies)");
     //     $this->db->bind(':Id', NULL, PDO::PARAM_NULL);
-    //     $this->db->bind(':Name', $post['name'], PDO::PARAM_STR);
-    //     $this->db->bind(':CapitalCity', $post['capitalCity'], PDO::PARAM_STR);
-    //     $this->db->bind(':Continent', $post['continent'], PDO::PARAM_STR);
-    //     $this->db->bind(':Population', $post['population'], PDO::PARAM_INT);
+    //     $this->db->bind(':Naam', $post['Naam'], PDO::PARAM_STR);
+    //     $this->db->bind(':Tussenvoegsel', $post['Tussenvoegsel'], PDO::PARAM_STR);
+    //     $this->db->bind(':Achternaam', $post['Achternaam'], PDO::PARAM_STR);
+    //     $this->db->bind(':Volwassenen', $post['Volwassenen'], PDO::PARAM_INT);
+    //     $this->db->bind(':Kinderen', $post['Kinderen'], PDO::PARAM_INT);
+    //     $this->db->bind(':Babies', $post['Babies'], PDO::PARAM_INT);
     //     return $this->db->execute();
     // }
+    public function createKlant($post)
+    {
+        $query = "INSERT INTO klant (Naam, Tussenvoegsel, Achternaam, Volwassenen, Kinderen, Babies, DatumAangemaakt, DatumGewijzigd)
+                  VALUES (:Naam, :Tussenvoegsel, :Achternaam, :Volwassenen, :Kinderen, :Babies, SYSDATE(), SYSDATE())";
+
+        $statement = $this->db->prepare($query);
+
+        $statement->bindValue(':Naam', $post['Naam']);
+        $statement->bindValue(':Tussenvoegsel', $post['Tussenvoegsel']);
+        $statement->bindValue(':Achternaam', $post['Achternaam']);
+        $statement->bindValue(':Volwassenen', $post['Volwassenen']);
+        $statement->bindValue(':Kinderen', $post['Kinderen']);
+        $statement->bindValue(':Babies', $post['Babies']);
+
+        $result = $statement->execute();
+
+        return $result;
+    }
 }

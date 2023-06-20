@@ -4,21 +4,30 @@
     <table>
         <tbody>
             <tr>
-                <td>Land:</td>
-                <td><input type="text" name="name" id="name" value="<?= $data['Name']; ?>"></td>
+                <td>Naam:</td>
+                <td><input type="text" name="Naam" id="Naam" value="<?= $data['Naam']; ?>"></td>
             </tr>
             <tr>
-                <td>Hoofstad:</td>
-                <td><input type="text" name="capitalCity" id="capitalCity" value="<?= $data['CapitalCity']; ?>"></td>
+                <td>Tussenvoegsel:</td>
+                <td><input type="text" name="Tussenvoegsel" id="Tussenvoegsel" value="<?= $data['Tussenvoegsel']; ?>"></td>
             </tr>
             <tr>
-                <td>Continent:</td>
-                <td><input type="text" name="continent" id="continent" value="<?= $data['Continent']; ?>"></td>
+                <td>Achternaam:</td>
+                <td><input type="text" name="Achternaam" id="Achternaam" value="<?= $data['Achternaam']; ?>"></td>
             </tr>
             <tr>
-                <td>Aantal inwoners:</td>
-                <td><input type="text" name="population" id="population" value="<?= $data['Population']; ?>"></td>
+                <td>Aantal Volwassenen:</td>
+                <td><input type="number" name="Volwassenen" id="Volwassenen" max="2" value="<?= $data['Volwassenen']; ?>"></td>
             </tr>
+            <tr>
+                <td>Aantal Kinderen:</td>
+                <td><input type="number" name="Kinderen" id="Kinderen" max="2" value="<?= $data['Kinderen']; ?>"></td>
+            </tr>
+            <tr>
+                <td>Aantal Babies:</td>
+                <td><input type="number" name="Babies" id="Babies" max="2" value="<?= $data['Babies']; ?>"></td>
+            </tr>
+
             <tr>
                 <td><input type="hidden" name="id" id="id" value="<?= $data['Id']; ?>"></td>
                 <td><input type="submit" name="submit" id="submit" value="Verstuur"></td>
