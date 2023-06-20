@@ -2,10 +2,12 @@
 define('DB_HOST', 'localhost');
 define('DB_USER', 'root');
 define('DB_PASS', '');
-define('DB_NAME', 'mvc-2109a');
+define('DB_NAME', 'VoedselbankMaaskantje');
 
 define('APPROOT', dirname(dirname(__FILE__)));
 
 define('URLROOT', 'http://voedselbankmaaskantje.com');
 
 define('SITENAME', 'Voedselbank Maaskantje');
+
+define('DTZ', new DateTimeZone('Europe/Amsterdam'));

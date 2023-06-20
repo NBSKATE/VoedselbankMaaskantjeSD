@@ -1,4 +1,4 @@
-@everyoneDROP DATABASE IF EXISTS VoedselbankMaaskantje;
+DROP DATABASE IF EXISTS VoedselbankMaaskantje;
 CREATE DATABASE VoedselbankMaaskantje;
 USE VoedselbankMaaskantje;
 
@@ -175,12 +175,7 @@ VALUES
     ('categorie2', 1, NULL, SYSDATE(), SYSDATE()),
     ('categorie3', 1, NULL, SYSDATE(), SYSDATE()),
     ('categorie4', 1, NULL, SYSDATE(), SYSDATE()),
-    ('categorie5', 1, NULL, SYSDATE(), SYSDATE()),
-	('categorie6', 1, NULL, SYSDATE(), SYSDATE()),
-	('categorie7', 1, NULL, SYSDATE(), SYSDATE()),
-	('categorie8', 1, NULL, SYSDATE(), SYSDATE()),
-	('categorie9', 1, NULL, SYSDATE(), SYSDATE()),
-	('categorie10', 1, NULL, SYSDATE(), SYSDATE());
+    ('categorie5', 1, NULL, SYSDATE(), SYSDATE());
 
 -- Insert values into the `klant` table
 INSERT INTO `klant` (`Naam`, `AdresId`, `KlantContactId`, `Volwassenen`, `Kinderen`, `Babies`, `IsActief`, `Opmerking`, `DatumAangemaakt`, `DatumGewijzigd`)
@@ -226,3 +221,6 @@ VALUES
     (3, 1, 2, 1, NULL, SYSDATE(), SYSDATE()),
     (4, 2, 2, 1, NULL, SYSDATE(), SYSDATE()),
     (5, 1, 3, 1, NULL, SYSDATE(), SYSDATE());
+
+
+

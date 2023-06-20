@@ -36,7 +36,6 @@ class Countries extends Controller
         }
 
         $data = [
-            'title' => "Overzicht landen",
             'rows' => $rows
         ];
         $this->view('countries/index', $data);
