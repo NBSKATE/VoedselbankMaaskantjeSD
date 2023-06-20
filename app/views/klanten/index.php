@@ -27,7 +27,7 @@
                     <thead>
                         <tr>
                             <th>Id</th>
-                            <th>Naamm</th>
+                            <th>Naam</th>
                             <th>Voegsel</th>
                             <th>Achternaam</th>
                             <th>Volwassenen</th>

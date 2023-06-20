@@ -25,7 +25,6 @@ class Klant
 
         // $this->db->bind(':klantId', $klantId);
 
-
         return $this->db->resultSet();
     }
 
@@ -67,49 +66,49 @@ class Klant
 
 
 
-    // public function createKlant($post)
-    // {
-    //     $this->db->query("INSERT INTO klant (Id, 
-    //                                            Naam, 
-    //                                            Tussenvoegsel, 
-    //                                            Achternaam, 
-    //                                            Volwassenen,
-    //                                            Kinderen,
-    //                                            Babies
-    //                                            )
-    //                       VALUES              (:Id,
-    //                                            :Naam,
-    //                                            :Tussenvoegsel,
-    //                                            :Achternaam,
-    //                                            :Volwassenen,
-    //                                            :Kinderen,
-    //                                            :Babies)");
-    //     $this->db->bind(':Id', NULL, PDO::PARAM_NULL);
-    //     $this->db->bind(':Naam', $post['Naam'], PDO::PARAM_STR);
-    //     $this->db->bind(':Tussenvoegsel', $post['Tussenvoegsel'], PDO::PARAM_STR);
-    //     $this->db->bind(':Achternaam', $post['Achternaam'], PDO::PARAM_STR);
-    //     $this->db->bind(':Volwassenen', $post['Volwassenen'], PDO::PARAM_INT);
-    //     $this->db->bind(':Kinderen', $post['Kinderen'], PDO::PARAM_INT);
-    //     $this->db->bind(':Babies', $post['Babies'], PDO::PARAM_INT);
-    //     return $this->db->execute();
-    // }
-
     public function createKlant($post)
     {
-        $query = "INSERT INTO klant (Naam, Tussenvoegsel, Achternaam, Volwassenen, Kinderen, Babies, DatumAangemaakt, DatumGewijzigd)
-                  VALUES (:Naam, :Tussenvoegsel, :Achternaam, :Volwassenen, :Kinderen, :Babies, SYSDATE(), SYSDATE())";
-
-        $statement = $this->db->prepare($query);
-
-        $statement->bindValue(':Naam', $post['Naam']);
-        $statement->bindValue(':Tussenvoegsel', $post['Tussenvoegsel']);
-        $statement->bindValue(':Achternaam', $post['Achternaam']);
-        $statement->bindValue(':Volwassenen', $post['Volwassenen']);
-        $statement->bindValue(':Kinderen', $post['Kinderen']);
-        $statement->bindValue(':Babies', $post['Babies']);
-
-        $result = $statement->execute();
- 
-        return $result;
+        $this->db->query("INSERT INTO klant (Id, 
+                                               Naam, 
+                                               Tussenvoegsel, 
+                                               Achternaam, 
+                                               Volwassenen,
+                                               Kinderen,
+                                               Babies
+                                               )
+                          VALUES              (:Id,
+                                               :Naam,
+                                               :Tussenvoegsel,
+                                               :Achternaam,
+                                               :Volwassenen,
+                                               :Kinderen,
+                                               :Babies)");
+        $this->db->bind(':Id', NULL, PDO::PARAM_NULL);
+        $this->db->bind(':Naam', $post['Naam'], PDO::PARAM_STR);
+        $this->db->bind(':Tussenvoegsel', $post['Tussenvoegsel'], PDO::PARAM_STR);
+        $this->db->bind(':Achternaam', $post['Achternaam'], PDO::PARAM_STR);
+        $this->db->bind(':Volwassenen', $post['Volwassenen'], PDO::PARAM_INT);
+        $this->db->bind(':Kinderen', $post['Kinderen'], PDO::PARAM_INT);
+        $this->db->bind(':Babies', $post['Babies'], PDO::PARAM_INT);
+        return $this->db->execute();
     }
+
+    // public function createKlant($post)
+    // {
+    //     $query = "INSERT INTO klant (Naam, Tussenvoegsel, Achternaam, Volwassenen, Kinderen, Babies, DatumAangemaakt, DatumGewijzigd)
+    //               VALUES (:Naam, :Tussenvoegsel, :Achternaam, :Volwassenen, :Kinderen, :Babies, SYSDATE(), SYSDATE())";
+
+    //     $statement = $this->db->prepare($query);
+
+    //     $statement->bindValue(':Naam', $post['Naam']);
+    //     $statement->bindValue(':Tussenvoegsel', $post['Tussenvoegsel']);
+    //     $statement->bindValue(':Achternaam', $post['Achternaam']);
+    //     $statement->bindValue(':Volwassenen', $post['Volwassenen']);
+    //     $statement->bindValue(':Kinderen', $post['Kinderen']);
+    //     $statement->bindValue(':Babies', $post['Babies']);
+
+    //     $result = $statement->execute();
+
+    //     return $result;
+    // }
 }
