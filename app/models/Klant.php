@@ -99,21 +99,17 @@ class Klant
         $query = "INSERT INTO klant (Naam, Tussenvoegsel, Achternaam, Volwassenen, Kinderen, Babies, DatumAangemaakt, DatumGewijzigd)
                   VALUES (:Naam, :Tussenvoegsel, :Achternaam, :Volwassenen, :Kinderen, :Babies, SYSDATE(), SYSDATE())";
 
-        $params = [
-            ':Naam' => $post['Naam'],
-            ':Tussenvoegsel' => $post['Tussenvoegsel'],
-            ':Achternaam' => $post['Achternaam'],
-            ':Volwassenen' => $post['Volwassenen'],
-            ':Kinderen' => $post['Kinderen'],
-            ':Babies' => $post['Babies']
-        ];
+        $statement = $this->db->prepare($query);
 
-        $this->db->query($query);
+        $statement->bindValue(':Naam', $post['Naam']);
+        $statement->bindValue(':Tussenvoegsel', $post['Tussenvoegsel']);
+        $statement->bindValue(':Achternaam', $post['Achternaam']);
+        $statement->bindValue(':Volwassenen', $post['Volwassenen']);
+        $statement->bindValue(':Kinderen', $post['Kinderen']);
+        $statement->bindValue(':Babies', $post['Babies']);
 
-        foreach ($params as $param => $value) {
-            $this->db->bind($param, $value);
-        }
-
-        return $this->db->execute();
+        $result = $statement->execute();
+ 
+        return $result;
     }
 }
