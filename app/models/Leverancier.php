@@ -17,10 +17,10 @@ class Leverancier
 
     public function getLeveranciers()
     {
-        $this->db->query('SELECT l.Naam, l.ContactPersoon, l.LeverancierNummer, l.LeverancierType, c.Email, c.Mobiel
-        FROM Leverancier l
-        JOIN ContactPerLeverancier cpl ON l.Id = cpl.LeverancierId
-        JOIN Contact c ON cpl.ContactId = c.Id;');
+        $this->db->query('SELECT Leverancier.Id, Leverancier.Naam, Leverancier.ContactPersoon, Leverancier.LeverancierNummer, Leverancier.LeverancierType, Contact.Email, Contact.Mobiel
+        FROM Leverancier
+        INNER JOIN Contact ON Leverancier.Id = Contact.Id;
+        ');
 
         // $this->db->bind(':LeverancierId', $leverancierId);
 

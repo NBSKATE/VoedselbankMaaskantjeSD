@@ -21,10 +21,10 @@ class Leveranciers extends Controller
         foreach ($records as $items) {
             $rows .= "<tr>
                         <td>$items->Naam</td>
-                        <td>$items->Contactpersoon</td>
+                        <td>$items->ContactPersoon</td>
                         <td>$items->Email</td>
                         <td>$items->Mobiel</td>
-                        <td>$items->Leveranciernummer</td>
+                        <td>$items->LeverancierNummer</td>
                         <td>$items->LeverancierType</td>
                         
                         <td>

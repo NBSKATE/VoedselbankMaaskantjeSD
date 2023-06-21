@@ -26,20 +26,12 @@
                 <table class="table table-dark table-hover">
                     <thead>
                         <tr>
-                            <th>Id</th>
                             <th>Naam</th>
-                            <th>Voegsel</th>
-                            <th>Achternaam</th>
-                            <th>Volwassenen</th>
-                            <th>Kinderen</th>
-                            <th>Babies</th>
-                            <th>Telefoon</th>
+                            <th>Contactpersoon</th>
                             <th>Email</th>
-                            <th>Straatnaam</th>
-                            <th>Huisnr</th>
-                            <th>Toevoeging</th>
-                            <th>Postcode</th>
-                            <th>Plaats</th>
+                            <th>Mobiel</th>
+                            <th>Leveranciernummer</th>
+                            <th>LeverancierType</th>
                         </tr>
                     </thead>
                     </tbody>
