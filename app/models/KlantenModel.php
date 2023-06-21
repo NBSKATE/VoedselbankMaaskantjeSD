@@ -1,45 +1,49 @@
 <?php
 /**
- * This is the model for the Voedselpakket controller.
+ * This is the model for the Klanten controller.
  */
-class VoedselpakketModel
+class KlantenModel
 {
-    // Properties
     private $db;
 
-    // Constructor of the Voedselpakket model class
     public function __construct()
     {
         $this->db = new Database();
     }
 
-    public function getVoedselpakket()
+    public function getKlanten()
     {
-        $this->db->query('SELECT klant.Id, klant.Naam, klant.Tussenvoegsel, klant.Achternaam, klant.Volwassenen, klant.Kinderen, klant.Babies, klant.Wens, 
-        adres.Straatnaam, adres.Huisnummer, adres.Toevoeging, adres.Postcode, adres.Plaats, contact.Telefoon, contact.Email
-        FROM klant
-        JOIN adres ON klant.AdresId = adres.Id
-        JOIN contact ON klant.KlantContactId = contact.Id;');
-
-        // $this->db->bind(':klantId', $klantId);
-
-
+        $this->db->query('SELECT persoon.Id, persoon.GezinId, persoon.Voornaam, persoon.Achternaam,
+        persoon.Geboortedatum, persoon.TypePersoon
+        FROM persoon
+        JOIN gezin ON gezin.GezinId = gezin.Id
+        JOIN contact ON contact.ContactId = contact.Id');
+    
         return $this->db->resultSet();
     }
+    
 
-    public function getVoedselpakketById ($id)
+    public function getKlantenById($id)
     {
-        $this->db->query("SELECT * FROM klant WHERE Id = :id");
+        $this->db->query("SELECT * FROM persoon WHERE Id = :id");
         $this->db->bind(':id', $id, PDO::PARAM_INT);
         return $this->db->single();
     }
 
-    public function deleteVoedselpakket($id)
+    public function updateKlanten($id)
     {
-        $this->db->query("DELETE FROM klant WHERE Id = :id");
+        $this->db->query("UPDATE persoon SET ... WHERE Id = :id");
+        $this->db->bind(':id', $id, PDO::PARAM_INT);
+        return $this->db->single();
+    }
+
+    public function deleteklant($id)
+    {
+        $this->db->query("DELETE FROM persoon WHERE Id = :id");
         $this->db->bind(':id', $id, PDO::PARAM_INT);
         return $this->db->execute();
     }
+
 //     public function getVoedselpakketById($id)
 //     {
 //         $this->db->query("SELECT * FROM voedselpakket WHERE Id = :id");
