@@ -4,7 +4,7 @@
  * Dit is de model voor de controller Leveranciers
  */
 
-class Klant
+class Leverancier
 {
     //properties
     private $db;
@@ -17,13 +17,12 @@ class Klant
 
     public function getLeveranciers()
     {
-        $this->db->query('SELECT klant.Id, klant.Naam, klant.Tussenvoegsel, klant.Achternaam, klant.Volwassenen, klant.Kinderen, klant.Babies, klant.Wens, 
-        adres.Straatnaam, adres.Huisnummer, adres.Toevoeging, adres.Postcode, adres.Plaats, contact.Telefoon, contact.Email
-        FROM klant
-        JOIN adres ON klant.AdresId = adres.Id
-        JOIN contact ON klant.KlantContactId = contact.Id;');
+        $this->db->query('SELECT l.Naam, l.ContactPersoon, l.LeverancierNummer, l.LeverancierType, c.Email, c.Mobiel
+        FROM Leverancier l
+        JOIN ContactPerLeverancier cpl ON l.Id = cpl.LeverancierId
+        JOIN Contact c ON cpl.ContactId = c.Id;');
 
-        // $this->db->bind(':klantId', $klantId);
+        // $this->db->bind(':LeverancierId', $leverancierId);
 
         return $this->db->resultSet();
     }

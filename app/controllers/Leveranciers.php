@@ -20,28 +20,16 @@ class Leveranciers extends Controller
 
         foreach ($records as $items) {
             $rows .= "<tr>
-                        <td>$items->Id</td>
                         <td>$items->Naam</td>
-                        <td>$items->Tussenvoegsel</td>
-                        <td>$items->Achternaam</td>
-                        <td>$items->Volwassenen</td>
-                        <td>$items->Kinderen</td>
-                        <td>$items->Babies</td>
-                        <td>$items->Telefoon</td>
+                        <td>$items->Contactpersoon</td>
                         <td>$items->Email</td>
-                        <td>$items->Straatnaam</td>
-                        <td>$items->Huisnummer</td>
-                        <td>$items->Toevoeging</td>
-                        <td>$items->Postcode</td>
-                        <td>$items->Plaats</td>
-
+                        <td>$items->Mobiel</td>
+                        <td>$items->Leveranciernummer</td>
+                        <td>$items->LeverancierType</td>
+                        
                         <td>
                             <a href='" . URLROOT . "/leveranciers/update/$items->Id'>update</a>
-                        </td>
-                        <td>
-                            <a href='" . URLROOT . "/leveranciers/delete/$items->Id'>delete</a>
-                        </td>
-                        
+                        </td>                       
                       </tr>";
         }
 
@@ -83,17 +71,17 @@ class Leveranciers extends Controller
         $this->view('leveranciers/update', $data);
     }
 
-    public function delete($id)
-    {
-        $result = $this->leverancierModel->deleteKlant($id);
-        if ($result) {
-            echo "Het record is verwijderd uit de database";
-            header("Refresh: 3; URL=" . URLROOT . "/leveranciers/index");
-        } else {
-            echo "Internal servererror, het record is niet verwijderd";
-            header("Refresh: 3; URL=" . URLROOT . "/leveranciers/index");
-        }
-    }
+    // public function delete($id)
+    // {
+    //     $result = $this->leverancierModel->deleteKlant($id);
+    //     if ($result) {
+    //         echo "Het record is verwijderd uit de database";
+    //         header("Refresh: 3; URL=" . URLROOT . "/leveranciers/index");
+    //     } else {
+    //         echo "Internal servererror, het record is niet verwijderd";
+    //         header("Refresh: 3; URL=" . URLROOT . "/leveranciers/index");
+    //     }
+    // }
 
     // public function create()
     // {
