@@ -13,8 +13,8 @@ CREATE TABLE Gezin (
   Emailadres VARCHAR(255),
   IsActief BOOLEAN,
   Opmerking VARCHAR(255) NULL,
-  DatumAangemaakt DATETIME NOT NULL
-  DatumGewijzigd DATETIME NOT NULL,
+  DatumAangemaakt DATETIME NOT NULL,
+  DatumGewijzigd DATETIME NOT NULL
   PRIMARY KEY (Id)
 );
 
