@@ -5,6 +5,6 @@
         <a href="<?= URLROOT; ?>/klanten/index">toon klanten</a>
     </li>
     <li>
-        <a href="<?= URLROOT; ?>/lessen/index">Lesrooster weergeven</a>
+        <a href="<?= URLROOT; ?>/leveranciers/index">Leveranciers weergeven</a>
     </li>
 </ul>

@@ -1,227 +1,187 @@
-DROP DATABASE IF EXISTS VoedselbankMaaskantje;
-CREATE DATABASE VoedselbankMaaskantje;
-USE VoedselbankMaaskantje;
+DROP DATABASE IF EXISTS Voedselbank;
+CREATE DATABASE Voedselbank;
+USE Voedselbank;
 
-DROP DATABASE IF EXISTS VoedselbankMaaskantje;
-CREATE DATABASE VoedselbankMaaskantje;
-USE VoedselbankMaaskantje;
-
-CREATE TABLE `contact` (
-    `Id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-    `Telefoon` INT NOT NULL,
-    `Email` VARCHAR(255) NOT NULL,
-    `IsActief` BIT NULL DEFAULT 1, 
-    `Opmerking` VARCHAR(255) NULL,
-    `DatumAangemaakt` DATETIME NOT NULL,
-    `DatumGewijzigd` DATETIME NOT NULL,
-    PRIMARY KEY (`Id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
-
-
-
-
-CREATE TABLE `adres` (
-    `Id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-    `Straatnaam` VARCHAR(255) NOT NULL,
+CREATE TABLE Contact (
+    `Id` INT UNSIGNED AUTO_INCREMENT,
+    `Straat` VARCHAR(255) NOT NULL,
     `Huisnummer` INT NOT NULL,
     `Toevoeging` VARCHAR(255) NULL,
-    `Postcode` VARCHAR(255) NOT NULL,
-    `Plaats` VARCHAR(255) NOT NULL,
-    `IsActief` BIT NULL DEFAULT 1,
+    `Postcode` VARCHAR(10) NOT NULL,
+    `Woonplaats` VARCHAR(255) NOT NULL,
+    `Email` VARCHAR(255) NOT NULL,
+    `Mobiel` INT NOT NULL,
+    `IsActief` BIT NOT NULL,
     `Opmerking` VARCHAR(255) NULL,
     `DatumAangemaakt` DATETIME NOT NULL,
     `DatumGewijzigd` DATETIME NOT NULL,
     PRIMARY KEY (`Id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-
-
-
-
-CREATE TABLE `categorie` (
-    `Id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-    `Categorieomschrijving` VARCHAR(255) NOT NULL,
-    `IsActief` BIT NOT NULL DEFAULT 1,
-    `Opmerking` VARCHAR(255) NULL,
-    `DatumAangemaakt` DATETIME NOT NULL,
-    `DatumGewijzigd` DATETIME NOT NULL,
-    PRIMARY KEY (`Id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
-
-
-
-
-
-CREATE TABLE `klant` (
-    `Id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE Product (
+    `Id` INT UNSIGNED AUTO_INCREMENT NOT NULL,
+    `ProductCategorieId` INT UNSIGNED NULL,
     `Naam` VARCHAR(255) NOT NULL,
-	`Tussenvoegsel` VARCHAR(255) NULL,
-	`Achternaam` VARCHAR(255) NOT NULL,
-    `AdresId` INT UNSIGNED NULL,
-    `KlantContactId` INT UNSIGNED NULL,
-    `Volwassenen` INT NOT NULL,
-    `Kinderen` INT NULL,
-    `Babies` INT NULL,
-	`Wens` VARCHAR(255) NULL,
-    `IsActief` BIT NOT NULL DEFAULT 1,
+    `SoortAllergie` VARCHAR(255) NULL,
+    `Barcode` BIGINT NOT NULL,
+    `Houdbaarheidsdatum` DATE NOT NULL,
+    `Omschrijving` VARCHAR(255) NOT NULL,
+    `Status` VARCHAR(255) NOT NULL,
+    `IsActief` BIT NOT NULL,
     `Opmerking` VARCHAR(255) NULL,
     `DatumAangemaakt` DATETIME NOT NULL,
     `DatumGewijzigd` DATETIME NOT NULL,
     PRIMARY KEY (`Id`)
-    -- FOREIGN KEY (`AdresId`) REFERENCES `adres` (`Id`),
-    -- FOREIGN KEY (`KlantContactId`) REFERENCES `contact` (`Id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-
-
-
-
-CREATE TABLE `leverancier` (
-    `Id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-    `Bedrijfsnaam` VARCHAR(255) NOT NULL,
-    `AdresId` INT UNSIGNED NOT NULL,
-    `EerstvolgendeLeveringDatumEnTijd` DATETIME NULL,
-    `ContactId` INT UNSIGNED NOT NULL,
-    `Btwnummer` VARCHAR(255) NOT NULL,
-    `Kvknummer` INT NOT NULL,
-    `IsActief` BIT NOT NULL DEFAULT 1,
+CREATE TABLE Leverancier (
+    `Id` INT UNSIGNED AUTO_INCREMENT NOT NULL,
+    `Naam` VARCHAR(255) NOT NULL,
+    `ContactPersoon` VARCHAR(255) NOT NULL,
+    `LeverancierNummer` VARCHAR(5) NOT NULL,
+    `LeverancierType` VARCHAR(255) NOT NULL,
+    `IsActief` BIT NOT NULL,
     `Opmerking` VARCHAR(255) NULL,
     `DatumAangemaakt` DATETIME NOT NULL,
     `DatumGewijzigd` DATETIME NOT NULL,
-    PRIMARY KEY (`Id`),
-    FOREIGN KEY (`AdresId`) REFERENCES `adres` (`Id`),
-    FOREIGN KEY (`ContactId`) REFERENCES `contact` (`Id`)
+    PRIMARY KEY (`Id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-CREATE TABLE `product` (
-    `Id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-    `Productnaam` VARCHAR(255) NOT NULL,
-    `CategorieId` INT UNSIGNED NOT NULL,
-    `Streepjescode` VARCHAR(255) NOT NULL,
-    `Aantal` INT NOT NULL,
+CREATE TABLE ContactPerLeverancier (
+    `Id` INT UNSIGNED AUTO_INCREMENT NOT NULL,
     `LeverancierId` INT UNSIGNED NOT NULL,
-    `IsActief` BIT NOT NULL DEFAULT 1,
+    `ContactId` INT UNSIGNED NOT NULL,
+    `IsActief` BIT NOT NULL,
     `Opmerking` VARCHAR(255) NULL,
     `DatumAangemaakt` DATETIME NOT NULL,
     `DatumGewijzigd` DATETIME NOT NULL,
     PRIMARY KEY (`Id`),
-    FOREIGN KEY (`CategorieId`) REFERENCES `categorie` (`Id`),
-    FOREIGN KEY (`LeverancierId`) REFERENCES `leverancier` (`Id`)
+    FOREIGN KEY(`LeverancierId`) REFERENCES `Leverancier`(`Id`),
+    FOREIGN KEY(`ContactId`) REFERENCES `Contact`(`Id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-CREATE TABLE `voedselpakket` (
-    `Id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-    `KlantId` INT UNSIGNED NOT NULL,
-    `Samenstellingsdatum` DATETIME NOT NULL,
-    `Uitgiftedatum` DATETIME NOT NULL,
-    `IsActief` BIT NOT NULL DEFAULT 1,
-    `Opmerking` VARCHAR(255) NULL,
-    `DatumAangemaakt` DATETIME NOT NULL,
-    `DatumGewijzigd` DATETIME NOT NULL,
-    PRIMARY KEY (`Id`)
-   --  FOREIGN KEY (`KlantId`) REFERENCES `klant` (`Id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
-CREATE TABLE `productenVoedselpakket` (
-    `Id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE ProductPerLeverancier (
+    `Id` INT UNSIGNED AUTO_INCREMENT NOT NULL,
+    `LeverancierId` INT UNSIGNED NOT NULL,
     `ProductId` INT UNSIGNED NOT NULL,
-    `Aantal` INT NOT NULL,
-    `VoedselpakketId` INT UNSIGNED NOT NULL,
-    `IsActief` BIT NOT NULL DEFAULT 1,
+    `DatumAangeleverd` DATE NOT NULL,
+    `DatumEerstVolgendeLevering` DATE NOT NULL,
+    `IsActief` BIT NOT NULL,
     `Opmerking` VARCHAR(255) NULL,
-    `DatumAangemaakt` DATETIME NOT NULL ,
-    `DatumGewijzigd` DATETIME NOT NULL ,
+    `DatumAangemaakt` DATETIME NOT NULL,
+    `DatumGewijzigd` DATETIME NOT NULL,
     PRIMARY KEY (`Id`),
-    FOREIGN KEY (`ProductId`) REFERENCES `product` (`Id`),
-    FOREIGN KEY (`VoedselpakketId`) REFERENCES `voedselpakket` (`Id`)
+    FOREIGN KEY(`LeverancierId`) REFERENCES `Leverancier`(`Id`),
+    FOREIGN KEY(`ProductId`) REFERENCES `Product`(`Id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
 
 
 
+use Voedselbank;
 
--- Insert values into the `contact` table
-INSERT INTO `contact` (`Telefoon`, `Email`, `IsActief`, `Opmerking`, `DatumAangemaakt`, `DatumGewijzigd`)
+INSERT INTO Contact (Straat, Huisnummer, Toevoeging, Postcode, Woonplaats, Email, Mobiel, IsActief, Opmerking, DatumAangemaakt, DatumGewijzigd)
 VALUES
-    (0611111111, 'nummer1@gmail.com', 1, NULL, SYSDATE(), SYSDATE()),
-    (0622222222, 'nummer2@gmail.com', 1, NULL, SYSDATE(), SYSDATE()),
-    (0633333333, 'nummer3@gmail.com', 1, NULL, SYSDATE(), SYSDATE()),
-    (0644444444, 'nummer4@gmail.com', 1, NULL, SYSDATE(), SYSDATE()),
-    (0655555555, 'nummer5@gmail.com', 1, NULL, SYSDATE(), SYSDATE()),
-    (0666666666, 'nummer6@gmail.com', 1, NULL, SYSDATE(), SYSDATE()),
-    (0677777777, 'nummer7@gmail.com', 1, NULL, SYSDATE(), SYSDATE()),
-    (0688888888, 'nummer8@gmail.com', 1, NULL, SYSDATE(), SYSDATE()),
-    (0699999999, 'nummer9@gmail.com', 1, NULL, SYSDATE(), SYSDATE()),
-    (0610101010, 'nummer10@gmail.com', 1, NULL, SYSDATE(), SYSDATE());
+('Prinses Irenestraat', 12, 'A', '5271TH', 'Maaskantje', 'j.van.zevenhuizen@gmail.com', '0623456123', 1, NULL, SYSDATE(), SYSDATE()),
+('Gibraltarstraat', 234, NULL, '5271TJ', 'Maaskantje', 'a.bergkamp@hotmail.com', '0623456123', 1, NULL, SYSDATE(), SYSDATE()),
+('Der Kinderenstraat', 456, 'Bis', '5271TH', 'Maaskantje', 's.van.de.heuvel@gmail.com', '0623456123', 1, NULL, SYSDATE(), SYSDATE()),
+('Nachtegaalstraat', 233, 'A', '5271TJ', 'Maaskantje', 'e.scherder@gmail.com', '0623456123', 1, NULL, SYSDATE(), SYSDATE()),
+('Bertram Russellstraat', 45, NULL, '5271TH', 'Maaskantje', 'f.de.jong@hotmail.com', '0623456123', 1, NULL, SYSDATE(), SYSDATE()),
+('Leonardo Da VinciHof', 34, NULL, '5271ZE', 'Maaskantje', 'h.van.der.berg@gmail.com', '0623456123', 1, NULL, SYSDATE(), SYSDATE()),
+('Siegfried Knutsenlaan', 234, NULL, '5271ZE', 'Maaskantje', 'r.ter.weijden@ah.nl', '0623456123', 1, NULL, SYSDATE(), SYSDATE()),
+('Theo de Bokstraat', 256, NULL, '5271ZH', 'Maaskantje', 'l.pastoor@gmail.com', '0623456123', 1, NULL, SYSDATE(), SYSDATE()),
+('Meester van Leerhof', 2, 'A', '5271ZH', 'Maaskantje', 'm.yazidi@gemeenteutrecht.nl', '0623456123', 1, NULL, SYSDATE(), SYSDATE()),
+('Van Wemelenplantsoen', 300, NULL, '5271TH', 'Maaskantje', 'b.van.driel@gmail.com', '0623456123', 1, NULL, SYSDATE(), SYSDATE()),
+('Terlingenhof', 20, NULL, '5271TH', 'Maaskantje', 'j.pastorius@gmail.com', '0623456356', 1, NULL, SYSDATE(), SYSDATE()),
+('Veldhoen', 31, NULL, '5271ZE', 'Maaskantje', 's.dollaard@gmail.com', '0623452314', 1, NULL, SYSDATE(), SYSDATE()),
+('ScheringaDreef', 37, NULL, '5271ZE', 'Vught', 'j.blokker@gemeentevught.nl', '0623452314', 1, NULL, SYSDATE(), SYSDATE());
 
--- Insert values into the `adres` table
-INSERT INTO `adres` (`Straatnaam`, `Huisnummer`, `Toevoeging`, `Postcode`, `Plaats`, `IsActief`, `Opmerking`, `DatumAangemaakt`, `DatumGewijzigd`)
+
+INSERT INTO Product (ProductCategorieId, Naam, SoortAllergie, Barcode, Houdbaarheidsdatum, Omschrijving, Status, IsActief, Opmerking, DatumAangemaakt, DatumGewijzigd)
 VALUES
-    ('straat1', 11, NULL, '1111AT', 'Utrecht', 1, NULL, SYSDATE(), SYSDATE()),
-    ('straat2', 22, 'A', '2222AT', 'Utrecht', 1, NULL, SYSDATE(), SYSDATE()),
-    ('straat3', 33, NULL, '3333AT', 'Utrecht', 1, NULL, SYSDATE(), SYSDATE()),
-    ('straat4', 44, 'B', '4444AT', 'Utrecht', 1, NULL, SYSDATE(), SYSDATE()),
-    ('straat5', 55, NULL, '5555AT', 'Utrecht', 1, NULL, SYSDATE(), SYSDATE()),
-    ('straat6', 66, 'C', '6666AT', 'Utrecht', 1, NULL, SYSDATE(), SYSDATE()),
-    ('straat7', 77, NULL, '7777AT', 'Utrecht', 1, NULL, SYSDATE(), SYSDATE()),
-    ('straat8', 88, 'D', '8888AT', 'Utrecht', 1, NULL, SYSDATE(), SYSDATE()),
-    ('straat9', 99, NULL, '9999AT', 'Utrecht', 1, NULL, SYSDATE(), SYSDATE()),
-    ('straat10', 100, NULL, '1010AT', 'Utrecht', 1, NULL, SYSDATE(), SYSDATE());
+(1, 'Aardappel', NULL, '8719587321239', '2023-06-12', 'Kruimige aardappel', 'OpVoorraad', 1, NULL, SYSDATE(), SYSDATE()),
+(1, 'Ui', NULL, '8719437321335', '2023-05-02', 'Gele ui', 'NietOpVoorraad', 1, NULL, SYSDATE(), SYSDATE()),
+(1, 'Appel', NULL, '8719486321332', '2023-09-16', 'Granny Smith', 'NietLeverbaar', 1, NULL, SYSDATE(), SYSDATE()),
+(1, 'Banaan', 'Banaan', '8719484321336', '2023-04-12', 'Biologische Banaan', 'OverHoudbaarheidsDatum', 1, NULL, SYSDATE(), SYSDATE()),
+(2, 'Kaas', 'Lactose', '8719487421338', '2023-07-19', 'Jonge Kaas', 'OpVoorraad', 1, NULL, SYSDATE(), SYSDATE()),
+(2, 'Rosbief', NULL, '8719487421331', '2023-08-23', 'Rundvlees', 'OpVoorraad', 1, NULL, SYSDATE(), SYSDATE()),
+(3, 'Melk', 'Lactose', '8719447321332', '2023-08-23', 'Halfvolle melk', 'OpVoorraad', 1, NULL, SYSDATE(), SYSDATE()),
+(3, 'Margarine', NULL, '8719486321336', '2023-07-02', 'Plantaardige boter', 'OpVoorraad', 1, NULL, SYSDATE(), SYSDATE()),
+(3, 'Ei', 'Eier', '8719487421334', '2023-02-04', 'Scharrelei', 'OpVoorraad', 1, NULL, SYSDATE(), SYSDATE()),
+(4, 'Brood', 'Gluten', '8719487721337', '2023-05-07', 'Volkoren brood', 'OpVoorraad', 1, NULL, SYSDATE(), SYSDATE()),
+(4, 'Gevulde Koek', 'Amandel', '8719483321333', '2023-05-04', 'Banketbakkers kwaliteit', 'OpVoorraad', 1, NULL, SYSDATE(), SYSDATE()),
+(5, 'Fristi', 'Lactose', '8719487121331', '2023-05-28', 'Frisdrank', 'NietOpVoorraad', 1, NULL, SYSDATE(), SYSDATE()),
+(5, 'Appelsap', NULL, '8719487521335', '2023-05-19', '100% vruchtensap', 'OpVoorraad', 1, NULL, SYSDATE(), SYSDATE()),
+(5, 'Koffie', 'Caffeïne', '8719487381338', '2023-05-23', 'Arabica koffie', 'OverHoudbaarheidsDatum', 1, NULL, SYSDATE(), SYSDATE()),
+(5, 'Thee', 'Theïne', '8719487329339', '2023-04-02', 'Ceylon thee', 'OpVoorraad', 1, NULL, SYSDATE(), SYSDATE()),
+(6, 'Pasta', 'Gluten', '8719487321334', '2023-05-16', 'Macaroni', 'NietLeverbaar', 1, NULL, SYSDATE(), SYSDATE()),
+(6, 'Rijst', NULL, '8719487331332', '2023-05-25', 'Basmati Rijst', 'OpVoorraad', 1, NULL, SYSDATE(), SYSDATE()),
+(6, 'Knorr Nasi Mix', NULL, '8719487351354', '2023-05-13', 'Nasi kruiden', 'OpVoorraad', 1, NULL, SYSDATE(), SYSDATE()),
+(7, 'Tomatensoep', NULL, '8719487371337', '2023-05-23', 'Romige tomatensoep', 'OpVoorraad', 1, NULL, SYSDATE(), SYSDATE()),
+(7, 'Tomatensaus', NULL, '8719487341334', '2023-05-21', 'Pizza saus', 'NietOpVoorraad', 1, NULL, SYSDATE(), SYSDATE()),
+(7, 'Peterselie', NULL, '8719487321636', '2023-05-31', 'Verse kruidenpot', 'OpVoorraaad', 1, NULL, SYSDATE(), SYSDATE()),
+(8, 'Olie', NULL, '8719487327337', '2023-05-27', 'Olijfolie', 'OpVoorraad', 1, NULL, SYSDATE(), SYSDATE()),
+(8, 'Mars', NULL, '8719487324334', '2023-05-11', 'Snoep', 'OpVoorraad', 1, NULL, SYSDATE(), SYSDATE()),
+(8, 'Biscuit', NULL, '8719487311331', '2023-05-07', 'San Francisco biscuit', 'OpVoorraad', 1, NULL, SYSDATE(), SYSDATE()),
+(8, 'Paprika Chips', NULL, '8719487321839', '2023-05-22', 'Ribbelchips paprika', 'OpVoorraad', 1, NULL, SYSDATE(), SYSDATE()),
+(8, 'Chocolade reep', 'Cacoa', '8719487321533', '2023-05-21', 'Tony Chocolonely', 'OpVoorraad', 1, NULL, SYSDATE(), SYSDATE()),
+(9, 'Luier', NULL, '8719487321436', '2023-05-30', 'Baby luier', 'OpVoorraad', 1, NULL, SYSDATE(), SYSDATE()),
+(9, 'Scheerschuim', NULL, '8719487323338', '2023-02-22', 'Verzorgende scheerschuim', 'OpVoorraad', 1, NULL, SYSDATE(), SYSDATE()),
+(9, 'Toiletpapier', NULL, '8719487321535', '2023-01-02', '24 rollen 3 laags toiletpapier', 'OpVoorraad', 1, NULL, SYSDATE(), SYSDATE());
 
--- Insert values into the `categorie` table
-INSERT INTO `categorie` (`Categorieomschrijving`, `IsActief`, `Opmerking`, `DatumAangemaakt`, `DatumGewijzigd`)
+
+INSERT INTO Leverancier (Naam, ContactPersoon, LeverancierNummer, LeverancierType, IsActief, Opmerking, DatumAangemaakt, DatumGewijzigd)
+VALUES 
+    ('Albert Heijn', 'Ruud ter Weijden', 'L0001', 'Bedrijf', true, NULL, SYSDATE(), SYSDATE()),
+    ('Albertus Kerk', 'Leo Pastoor', 'L0002', 'Instelling', true, NULL, SYSDATE(), SYSDATE()),
+    ('Gemeente Utrecht', 'Mohammed Yazidi', 'L0003', 'Overheid', true, NULL, SYSDATE(), SYSDATE()),
+    ('Boerderij Meerhoven', 'Bertus van Driel', 'L0004', 'Particulier', true, NULL, SYSDATE(), SYSDATE()),
+    ('Jan van der Heijden', 'Jan van der Heijden', 'L0005', 'Donor', true, NULL, SYSDATE(), SYSDATE()),
+    ('Vomar', 'Jaco Pastorius', 'L0006', 'Bedrijf', true, NULL, SYSDATE(), SYSDATE()),
+    ('DekaMarkt', 'Sil den Dollaard', 'L0007', 'Bedrijf', true, NULL, SYSDATE(), SYSDATE()),
+    ('Gemeente Vught', 'Jan Blokker', 'L0008', 'Overheid', true, NULL, SYSDATE(), SYSDATE());
+
+
+INSERT INTO ContactPerLeverancier (LeverancierId, ContactId, IsActief, Opmerking, DatumAangemaakt, DatumGewijzigd)
+VALUES 
+    (1, 1, true, NULL, SYSDATE(), SYSDATE()),
+    (2, 2, true, NULL, SYSDATE(), SYSDATE()),
+    (3, 3, true, NULL, SYSDATE(), SYSDATE()),
+    (4, 4, true, NULL, SYSDATE(), SYSDATE()),
+    (5, 6, true, NULL, SYSDATE(), SYSDATE()),
+    (6, 7, true, NULL, SYSDATE(), SYSDATE()),
+    (7, 8, true, NULL, SYSDATE(), SYSDATE());
+
+
+INSERT INTO ProductPerLeverancier (LeverancierId, ProductId, DatumAangeleverd, DatumEerstVolgendeLevering, IsActief, Opmerking, DatumAangemaakt, DatumGewijzigd)
 VALUES
-    ('categorie1', 1, NULL, SYSDATE(), SYSDATE()),
-    ('categorie2', 1, NULL, SYSDATE(), SYSDATE()),
-    ('categorie3', 1, NULL, SYSDATE(), SYSDATE()),
-    ('categorie4', 1, NULL, SYSDATE(), SYSDATE()),
-    ('categorie5', 1, NULL, SYSDATE(), SYSDATE());
-
--- Insert values into the `klant` table
-INSERT INTO `klant` (`Naam`, `Tussenvoegsel`, `Achternaam`, `AdresId`, `KlantContactId`, `Volwassenen`, `Kinderen`, `Babies`, `Wens`, `IsActief`, `Opmerking`, `DatumAangemaakt`, `DatumGewijzigd`)
-VALUES
-    ('klant1', NULL, 'achternaam1', 1, 1, 2, 1, 0,'geen varkensvlees', 1, NULL, SYSDATE(), SYSDATE()),
-    ('klant2', NULL, 'achternaam2', 2, 2, 1, 0, 0,'allergie pindas ', 1, NULL, SYSDATE(), SYSDATE()),
-    ('klant3', 'van der', 'achternaam3', 3, 3, 2, 2, 1,'vegetarisch', 1, NULL, SYSDATE(), SYSDATE()),
-    ('klant4', NULL, 'achternaam4', 4, 4, 2, 0, 0, NULL, 1, NULL, SYSDATE(), SYSDATE()),
-    ('klant5', 'zo', 'achternaam5', 5, 5, 1, 0, 1,'Veganistisch', 1, NULL, SYSDATE(), SYSDATE());
-
--- Insert values into the `leverancier` table
-INSERT INTO `leverancier` (`Bedrijfsnaam`, `AdresId`, `EerstvolgendeLeveringDatumEnTijd`, `ContactId`, `Btwnummer`, `Kvknummer`, `IsActief`, `Opmerking`, `DatumAangemaakt`, `DatumGewijzigd`)
-VALUES
-    ('leverancier1', 6, '2023-06-20 10:00:00', 6, 'NL123456789B01', 12345678, 1, NULL, SYSDATE(), SYSDATE()),
-    ('leverancier2', 7, '2023-06-21 12:00:00', 7, 'NL987654321B01', 87654321, 1, NULL, SYSDATE(), SYSDATE()),
-    ('leverancier3', 8, '2023-06-22 09:30:00', 8, 'NL246813579B01', 24681357, 1, NULL, SYSDATE(), SYSDATE()),
-    ('leverancier4', 9, '2023-06-23 14:15:00', 9, 'NL135792468B01', 13579246, 1, NULL, SYSDATE(), SYSDATE()),
-    ('leverancier5', 10, '2023-06-24 11:45:00', 10, 'NL864209753B01', 86420975, 1, NULL, SYSDATE(), SYSDATE());
-
--- Insert values into the `product` table
-INSERT INTO `product` (`Productnaam`, `CategorieId`, `Streepjescode`, `Aantal`, `LeverancierId`, `IsActief`, `Opmerking`, `DatumAangemaakt`, `DatumGewijzigd`)
-VALUES
-    ('product1', 1, '123456789', 10, 1, 1, NULL, SYSDATE(), SYSDATE()),
-    ('product2', 2, '987654321', 20, 2, 1, NULL, SYSDATE(), SYSDATE()),
-    ('product3', 3, '246813579', 15, 3, 1, NULL, SYSDATE(), SYSDATE()),
-    ('product4', 4, '135792468', 30, 4, 1, NULL, SYSDATE(), SYSDATE()),
-    ('product5', 5, '864209753', 25, 5, 1, NULL, SYSDATE(), SYSDATE());
-
--- Insert values into the `voedselpakket` table
-INSERT INTO `voedselpakket` (`KlantId`, `Samenstellingsdatum`, `Uitgiftedatum`, `IsActief`, `Opmerking`, `DatumAangemaakt`, `DatumGewijzigd`)
-VALUES
-    (1, '2023-06-20 10:00:00', '2023-06-21 10:00:00', 1, NULL, SYSDATE(), SYSDATE()),
-    (2, '2023-06-21 12:00:00', '2023-06-22 12:00:00', 1, NULL, SYSDATE(), SYSDATE()),
-    (3, '2023-06-22 09:30:00', '2023-06-23 09:30:00', 1, NULL, SYSDATE(), SYSDATE()),
-    (4, '2023-06-23 14:15:00', '2023-06-24 14:15:00', 1, NULL, SYSDATE(), SYSDATE()),
-    (5, '2023-06-24 11:45:00', '2023-06-25 11:45:00', 1, NULL, SYSDATE(), SYSDATE());
-
--- Insert values into the `productenVoedselpakket` table
-INSERT INTO `productenVoedselpakket` (`ProductId`, `Aantal`, `VoedselpakketId`, `IsActief`, `Opmerking`, `DatumAangemaakt`, `DatumGewijzigd`)
-VALUES
-    (1, 2, 1, 1, NULL, SYSDATE(), SYSDATE()),
-    (2, 3, 1, 1, NULL, SYSDATE(), SYSDATE()),
-    (3, 1, 2, 1, NULL, SYSDATE(), SYSDATE()),
-    (4, 2, 2, 1, NULL, SYSDATE(), SYSDATE()),
-    (5, 1, 3, 1, NULL, SYSDATE(), SYSDATE());
-
+    (4,1, '2023-04-12', '2023-05-12', true, NULL, SYSDATE(), SYSDATE()),
+    (4,2, '2023-03-02', '2023-04-02', true, NULL, SYSDATE(), SYSDATE()),
+    (2,3, '2023-07-16', '2023-08-16', true, NULL, SYSDATE(), SYSDATE()),
+    (1,4, '2023-02-12', '2023-03-12', true, NULL, SYSDATE(), SYSDATE()),
+    (4,5, '2023-05-19', '2023-06-19', true, NULL, SYSDATE(), SYSDATE()),
+    (1,6, '2023-06-23', '2023-07-23', true, NULL, SYSDATE(), SYSDATE()),
+    (4,7, '2023-06-20', '2023-07-20', true, NULL, SYSDATE(), SYSDATE()),
+    (4,8, '2023-05-02', '2023-06-02', true, NULL, SYSDATE(), SYSDATE()),
+    (4,9, '2022-12-04', '2023-01-04', true, NULL, SYSDATE(), SYSDATE()),
+    (3,10, '2023-03-07', '2023-04-07', true, NULL, SYSDATE(), SYSDATE()),
+    (3,11, '2023-02-04', '2023-03-04', true, NULL, SYSDATE(), SYSDATE()),
+    (3,12, '2023-02-28', '2023-03-28', true, NULL, SYSDATE(), SYSDATE()),
+    (3,13, '2023-03-19', '2023-04-19', true, NULL, SYSDATE(), SYSDATE()),
+    (2,14, '2023-03-23', '2023-04-23', true, NULL, SYSDATE(), SYSDATE()),
+    (2,15, '2023-02-02', '2023-03-02', true, NULL, SYSDATE(), SYSDATE()),
+    (1,16, '2023-02-16', '2023-03-16', true, NULL, SYSDATE(), SYSDATE()),
+    (1,17, '2023-03-25', '2023-04-25', true, NULL, SYSDATE(), SYSDATE()),
+    (1,18, '2023-03-13', '2023-04-13', true, NULL, SYSDATE(), SYSDATE()),
+    (1,19, '2023-03-23', '2023-04-23', true, NULL, SYSDATE(), SYSDATE()),
+    (4,20, '2023-02-21', '2023-03-21', true, NULL, SYSDATE(), SYSDATE()),
+    (2,21, '2023-03-31', '2023-04-30', true, NULL, SYSDATE(), SYSDATE()),
+    (1,22, '2023-03-27', '2023-04-27', true, NULL, SYSDATE(), SYSDATE()),
+    (3,23, '2023-04-11', '2023-04-18', true, NULL, SYSDATE(), SYSDATE()),
+    (3,24, '2023-04-07', '2023-04-14', true, NULL, SYSDATE(), SYSDATE()),
+    (1,25, '2023-05-07', '2023-05-14', true, NULL, SYSDATE(), SYSDATE()),
+    (2,26, '2023-05-05', '2023-05-12', true, NULL, SYSDATE(), SYSDATE()),
+    (1,27, '2023-05-02', '2023-05-09', true, NULL, SYSDATE(), SYSDATE()),
+    (4,28, '2022-12-22', '2023-01-22', true, NULL, SYSDATE(), SYSDATE()),
+    (4,29, '2022-12-12', '2023-01-19', true, NULL, SYSDATE(), SYSDATE());
