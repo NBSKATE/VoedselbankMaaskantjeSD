@@ -51,6 +51,7 @@
                             <th>Mobiel</th>
                             <th>Leveranciernummer</th>
                             <th>LeverancierType</th>
+                            <th>Wijzig Product</th>
                         </tr>
                     </thead>
                     </tbody>

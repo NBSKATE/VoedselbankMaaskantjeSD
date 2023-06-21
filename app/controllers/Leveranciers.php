@@ -28,7 +28,7 @@ class Leveranciers extends Controller
                         <td>$items->LeverancierType</td>
                         
                         <td>
-                            <a href='" . URLROOT . "/leveranciers/update/$items->Id'>update</a>
+                            <a href='" . URLROOT . "/leveranciers/productDetails/$items->Id'>Product Details</a>
                         </td>                       
                       </tr>";
         }
@@ -39,6 +39,19 @@ class Leveranciers extends Controller
         ];
         $this->view('leveranciers/index', $data);
     }
+
+    //
+    public function productDetails()
+    {
+       echo"hoi";
+
+        $data = [
+            'title' => "Overzicht leveranciers",
+          
+        ];
+        $this->view('leveranciers/productDetails', $data);
+    }
+    //    
 
     public function update($id = null)
     {
