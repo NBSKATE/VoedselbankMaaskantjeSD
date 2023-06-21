@@ -8,8 +8,8 @@ CREATE TABLE Gezin (
   Huisnummer INT NOT NULL,
   Toevoeging VARCHAR(255),
   Postcode VARCHAR(255) NOT NULL,
-  Plaats VARCHAR(255) NOT NULL,
-  Telefoonnummer VARCHAR(255)
+  Plaats VARCHAR(255) NOT NULL
+  Telefoonnummer VARCHAR(255),
   Emailadres VARCHAR(255),
   IsActief BOOLEAN,
   Opmerking VARCHAR(255) NULL,
