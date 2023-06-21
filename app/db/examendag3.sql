@@ -11,8 +11,8 @@ CREATE TABLE Gezin (
   Plaats VARCHAR(255) NOT NULL,
   Telefoonnummer VARCHAR(255),
   Emailadres VARCHAR(255),
-  IsActief BOOLEAN
-  Opmerking VARCHAR(255) NULL,
+  IsActief BOOLEAN,
+  Opmerking VARCHAR(255) NULL
   DatumAangemaakt DATETIME NOT NULL,
   DatumGewijzigd DATETIME NOT NULL,
   PRIMARY KEY (Id)
