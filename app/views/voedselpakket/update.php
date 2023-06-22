@@ -19,9 +19,9 @@
 
 <body>
             <ul class="list-group">
-                <li class="list-group-item">Naam</li>
-                <li class="list-group-item">Omschrijving</li>
-                <li class="list-group-item">Totaal aantal personen</li>
+                <li class="list-group-item"><?= $name;?></li>
+                <li class="list-group-item"><?= $data['rows'];?></li>
+                <li class="list-group-item"><?= $data['rows'];?></li>
             </ul>
 
             <div class="row">
