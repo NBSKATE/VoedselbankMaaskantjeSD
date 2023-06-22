@@ -1,4 +1,5 @@
 <?php
+
 /**
  * This is the model for the Voedselpakket controller.
  */
@@ -14,14 +15,14 @@ class VoedselpakketModel
     }
 
     public function getVoedselpakket()
-{
-    $this->db->query('SELECT klant.Id, klant.Naam, klant.Tussenvoegsel, klant.Achternaam, klant.Volwassenen, klant.Kinderen, klant.Babies, klant.Vertegenwoordiger,
-    adres.Straatnaam, adres.Huisnummer, adres.Toevoeging, adres.Postcode, adres.Plaats, contact.Telefoonnummer, contact.Emailadres
-    FROM klant
-    JOIN adres ON klant.AdresId = adres.Id
-    JOIN contact ON klant.KlantContactId = contact.Id;');
+    {
+        $this->db->query('SELECT gezin.Naam, gezin.Omschrijving, gezin.AantalVolwassenen, gezin.Aantalkinderen, gezin.Aantalbabys, persoon.Voornaam, persoon.Tussenvoegsel, persoon.Achternaam, persoon.IsVertegenwoordiger, voedselpakket.*
+        FROM Gezin gezin
+        LEFT JOIN Persoon persoon ON gezin.Id = persoon.GezinId
+        LEFT JOIN Voedselpakket voedselpakket ON voedselpakket.GezinId = gezin.Id;        
+        ');
+        
 
-    return $this->db->resultSet();
-}
-
+        return $this->db->resultSet();
+    }
 }

@@ -7,7 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
     <title>Voedselpakket Overzicht</title>
 
@@ -19,31 +20,40 @@
 <body>
     <div class="container">
         <div class="row">
-            <h1>Overzicht van voedselpakketten</h1>
+            <h1>Overzicht gezinnen met voedselpakketten</h1>
+            <div class="row">
+            <div class="col">
+                <form method="POST" action="<?= URLROOT; ?>/voedselpakket/gezinnen">
+                    <div class="form-group">
+                        <label for="eetwens">Selecteer eetwens:</label>
+                        <select class="form-control" id="eetwens" name="eetwens">
+                            <?php foreach ($eetwensen as $eetwens) : ?>
+                            <option value="<?= $eetwens->Id; ?>"><?= $eetwens->Naam; ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Toon Gezinnen</button>
+                </form>
+            </div>
         </div>
+        
         <div class="row">
             <div class="col">
                 <table class="table table-white table-hover">
                     <thead>
                         <tr>
-                            <th>Id</th>
                             <th>Naam</th>
-                            <th>Tussenvoegsel</th>
-                            <th>Achternaam</th>
+                            <th>Omschrijving</th>
                             <th>Volwassenen</th>
                             <th>Kinderen</th>
                             <th>Babies</th>
-                            <th>Telefoon</th>
-                            <th>Email</th>
-                            <th>Straatnaam</th>
-                            <th>Huisnr</th>
-                            <th>Toevoeging</th>
-                            <th>Postcode</th>
-                            <th>Plaats</th>
+                            <th>Vertegenwoordiger</th>
+                            <th>Voedselpakket Details</th>
                         </tr>
                     </thead>
+                    <tbody>
+                        <?= $data['rows']; ?>
                     </tbody>
-                    <?= $data['rows']; ?>
                 </table>
             </div>
         </div>
@@ -52,10 +62,12 @@
     <!-- Optional JavaScript; choose one of the two! -->
 
     <!-- Option 1: Bootstrap Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-    
-    <p><a href="<?= URLROOT; ?>/landingpages/index">terug naar landingpage</a></p>
-    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
+    </script>
+
+    <p><a href="<?= URLROOT; ?>/landingpages/index">Terug naar de landingpagina</a></p>
+
 </body>
 
 </html>

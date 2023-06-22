@@ -1,5 +1,11 @@
 <h1>Homepage voedselbank maaskantje</h1>
 <li>
     <a href="<?= URLROOT; ?>/voedselpakket/index">Overzicht van de voedselpakketten</a>
+    <a href="your_link_here">
+  <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0IArs4c6QAAAt5JREFUSEvFlkmoz1EUxz/PkGGhhJ4oZWOIIiWLpx5KSbGwMCRDlBQbQ8976BkyZyyKQrGQsCCxUYaFlCSKlIWIbFiYMmTsq3Nfp/v/Dff3PL1b//r97+/e87n3nO8551dHJ426TuLyL+CJwGDgHPC76gXaAx4GHACmG+wRsBK4VQVeBTwA2AYsBbpmQK4Aq4GnKQdIAfcCmuzX24x+B/bY81qghz3/Ao4DG4E3RQcoAuvdQmAHMMgZuQPMA17YnN7tBBZAm2Y+29xe4GvWAfLAjcBhYHTGpp/ASWBDdKuRwH5gmtvzym5/OhZgDI6FIxsSzQpgCrAF6GuGP5m7dasvDqZDHwTGurkaAXrweOCuW/wcWAVcdHP9zPXL3NxrYD3gbyW784HtwBC3djFwSv89eDOwKQJLJGcy8nQMcAyYkHOrLhbzrRFYHhOnEBxsPrQ0uZ4R70XALmCge3cJGA6MyFhfCpaL1gA93eargFLnSWRQKSZXrwO6Re8+muCCJ0vBCkG9FYwlgFynodJ4wkKi2Gr0B1qB5UB3B75s6fjOhSoJHGzIZSoWM5zRb8A+QAVDnlGRiUcbpL3gYFBCOhQJysPuAS3ANZvsMHCAzLKUkoA0VJul/gt2s9CpOhws2CTghoEnAzfd1QWWqFRuQw2oOUxeHpc1jyKwOpiqmUQVRjK42dJAXShrFIH9enUtVT81EY1MVc8Bzrpdz6xwqCDEIwUsLejmQ93m2cB5/Y9dqsKurtTgFocm8djNFYFHAUcANYswbttXyoMwkRfLmZa7QbnKV7VCpcvbHHGpkMilvuBI8fqIqPFakYhU/tSFVNT12aPxwTrOfZevU4Fx1p/72DodTvE8CvzIEkmZerVHxiQ2fU+FTxwdIED8s8SouO4G3ucI8+90Cjjs1yeODKrPxvuULmqfCsXLImBZjIv2xgKsEc7/Age7c+3Bp2AKs7Krk42mLKwS4xR7yWv+AIobrB9qXlgsAAAAAElFTkSuQmCC"
+       alt="Voedselpakket"
+       width="50"
+       height="50">
+</a>
 </li>
 </ul>
