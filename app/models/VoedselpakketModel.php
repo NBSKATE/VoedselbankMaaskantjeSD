@@ -1,63 +1,45 @@
 <?php
 /**
- * This is the model for the Klanten controller.
+ * This is the model for the Voedselpakket controller.
  */
-class KlantenModel
+class VoedselpakketModel
 {
+    // Properties
     private $db;
 
+    // Constructor of the Voedselpakket model class
     public function __construct()
     {
         $this->db = new Database();
     }
 
-    public function getKlanten()
+    public function getVoedselpakket()
     {
-        $this->db->query('SELECT PERS.Id as persoonId, GEZI.Naam ,PERS.Voornaam ,PERS.Tuusenvoegsel ,PERS.Achternaam ,CONT.Email ,CONT.Mobiel ,CONT.Straat ,CONT.Huisnummer ,CONT.Toevoeging, CONT.Woonplaats 
-        FROM gezin AS GEZI 
-        INNER JOIN persoon AS PERS ON PERS.GezinId = GEZI.Id 
-        INNER JOIN contactpergezin AS COGE ON COGE.GezinId = GEZI.Id 
-        INNER JOIN contact AS CONT ON CONT.Id = COGE.ContactId 
-        WHERE PERS.IsVertegenwoordig = 1;');
+        $this->db->query('SELECT klant.Id, klant.Naam, klant.Tussenvoegsel, klant.Achternaam, klant.Volwassenen, klant.Kinderen, klant.Babies, klant.Wens, 
+        adres.Straatnaam, adres.Huisnummer, adres.Toevoeging, adres.Postcode, adres.Plaats, contact.Telefoon, contact.Email
+        FROM klant
+        JOIN adres ON klant.AdresId = adres.Id
+        JOIN contact ON klant.KlantContactId = contact.Id;');
+
+        // $this->db->bind(':klantId', $klantId);
+
+
         return $this->db->resultSet();
     }
 
-    
-    public function getKlantenId(
-        
-    )
+    public function getVoedselpakketById ($id)
     {
-        $this->db->query('SELECT PERS.Id as persoonId, PERS.Voornaam ,PERS.Tuusenvoegsel ,PERS.Achternaam ,PERS.Geboortedatum ,PERS.TypePersoon ,PERS.IsVertegenwoordig ,CONT.Straat ,CONT.Huisnummer ,CONT.Toevoeging ,CONT.Postcode ,CONT.Woonplaats ,CONT.Email ,CONT.Mobiel
-        FROM gezin AS GEZI 
-        INNER JOIN persoon AS PERS ON PERS.GezinId = GEZI.Id 
-        INNER JOIN contactpergezin AS COGE ON COGE.GezinId = GEZI.Id 
-        INNER JOIN contact AS CONT ON CONT.Id = COGE.ContactId 
-        WHERE PERS.ID = 4;');
-        return $this->db->execute();
-    }
-    
-
-    public function getKlantenByName($id)
-    {
-        $this->db->query("SELECT * FROM persoon WHERE Id = :id");
+        $this->db->query("SELECT * FROM klant WHERE Id = :id");
         $this->db->bind(':id', $id, PDO::PARAM_INT);
         return $this->db->single();
     }
 
-    public function updateKlanten($id)
+    public function deleteVoedselpakket($id)
     {
-        $this->db->query("UPDATE persoon SET ... WHERE Id = :id");
-        $this->db->bind(':id', $id, PDO::PARAM_INT);
-        return $this->db->single();
-    }
-
-    public function deleteklant($id)
-    {
-        $this->db->query("DELETE FROM persoon WHERE Id = :id");
+        $this->db->query("DELETE FROM klant WHERE Id = :id");
         $this->db->bind(':id', $id, PDO::PARAM_INT);
         return $this->db->execute();
     }
-
 //     public function getVoedselpakketById($id)
 //     {
 //         $this->db->query("SELECT * FROM voedselpakket WHERE Id = :id");

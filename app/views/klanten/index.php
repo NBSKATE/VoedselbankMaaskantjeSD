@@ -52,7 +52,7 @@
         <div class="container">
             <div class="containerform">
                 <select class="form-select" aria-label="Default select example">
-                    <option selected>Selecteer een postcode</option>
+                    <option selected>Selecteer een postcode:</option>
                     <option value="1">5271TH</option>
                     <option value="2">5271ZE</option>
                     <option value="3">5271TJ</option>

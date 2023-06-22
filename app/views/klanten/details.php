@@ -32,6 +32,11 @@
         justify-content: flex-end;
         align-items: center;
     }
+    .containerbutton2{
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+    }
     
     .form-select {
         margin-right: 10px;
@@ -45,13 +50,14 @@
 <body>
     <div class="container">
         <div class="row">
-            <h1>Wijzig Klant Details</h1>
+            <h1>Klanten Details</h1>
         </div>
     </div>
 
 <div class="container">
         <div class="row">
             <div class="col">
+            <span class="border border-light-subtle">
                 <table class="table table-striped table-hover table-bordered">
                     <thead>
                         <tr>
@@ -97,12 +103,21 @@
                     </tbody>
                     <?= $data['rows']; ?>
                 </table>
+            </span>
             </div>
         </div>
     </div>
 
     <div class="container">
+        <div class="containerbutton2">
+            <button type="button" class="btn btn-primary" onclick="window.location.href='<?= URLROOT; ?>/klanten/update'">Wijzig</button>
+            
+        </div>
+    </div>
+
+    <div class="container">
         <div class="containerbutton">
+            <button type="button" class="btn btn-primary" onclick="window.location.href='<?= URLROOT; ?>/klanten/index'">Terug</button>
             <button type="button" class="btn btn-primary" onclick="window.location.href='<?= URLROOT; ?>/landingpages/index'">Home</button>
         </div>
     </div>

@@ -37,8 +37,10 @@ class Database
 
     public function query($sql) 
     {
-        $this->statement = $this->dbHandler->prepare($sql);
+    $this->statement = $this->dbHandler->prepare($sql);
+    $this->statement->execute();
     }
+
 
     public function bind($parameter, $value, $type = null) 
     {
