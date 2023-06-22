@@ -51,13 +51,13 @@ class Leveranciers extends Controller
         foreach ($record as $items) {
             $rows .= "          
                         <tr>
-                        <td>$items->LeverancierNaam</td>
+                        <td>$items->ProductNaam</td>
                         <td>$items->SoortAllergie</td>
                         <td>$items->Barcode</td>
                         <td>$items->Houdbaarheidsdatum</td>
                         
                         <td>
-                            <a href='" . URLROOT . "/leveranciers/update/$items->LeverancierId'>wijzig product</a>
+                            <a href='" . URLROOT . "/leveranciers/update/$items->ProductId'>wijzig product</a>
                         </td>                       
                       </tr>";
         }
@@ -94,6 +94,9 @@ class Leveranciers extends Controller
             'rowz' => $rowz
         ];
 
+
+
+
         $this->view('leveranciers/productDetails', $data);
     }
 
@@ -122,7 +125,7 @@ class Leveranciers extends Controller
 
     /////
 
-    public function update($id = null)
+    public function update($ProductId = null)
     {
         // var_dump($id);
         // exit;
@@ -134,17 +137,32 @@ class Leveranciers extends Controller
              * Maak het $_POST array schoon
              */
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            // var_dump($_POST);
 
-            $this->leverancierModel->updateProduct($_POST);
+            $Update = $this->leverancierModel->updateProduct($_POST);
 
-            header("Location: " . URLROOT . "/leverancier/update");
+
+            if ($Update) {
+                echo "De houdbaarheidsdatum is gewijzigd";
+                header("Refresh: 3; URL=" . URLROOT . "/leveranciers/index");
+            } else {
+                echo "De houdbaarheidsdatum mag met maximaal 7 dagen worden verlengt";
+                header("Refresh: 3; URL=" . URLROOT . "/leveranciers/index");
+            }
+
+
+            // header("Location: " . URLROOT . "/leverancier/update");
         } else {
 
-            $record = $this->leverancierModel->getupdatedetails($id);
+            $record = $this->leverancierModel->getupdatedetails($ProductId);
             // var_dump($record);
 
 
-            $data = ['title' => 'Wijzig Product', 'datum' => $record->Houdbaarheidsdatum, 'id' => $id];
+            $data = [
+                'title' => 'Wijzig Product', 'datum' => $record->Houdbaarheidsdatum,
+                'id' => $ProductId
+            ];
+            // var_dump($data);
             $this->view('leveranciers/update', $data);
         }
     }

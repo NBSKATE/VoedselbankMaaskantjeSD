@@ -5,7 +5,7 @@
         <tbody>
             <tr>
                 <td>Houdbaarheidsdatum:</td>
-                <td><input type="text" name="Date" id="Date" value="<?= $data['datum']; ?>"></td>
+                <td><input type="Date" name="Date" id="Date" value="<?= $data['datum']; ?>"></td>
                 <td><input type="hidden" name="id" id="id" value="<?= $data['id']; ?>"></td>
             </tr>
 

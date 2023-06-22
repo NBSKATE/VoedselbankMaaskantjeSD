@@ -89,17 +89,19 @@ class Leverancier
         JOIN ProductPerLeverancier pl ON l.Id = pl.LeverancierId
         JOIN Product p ON pl.ProductId = p.Id
     WHERE
-        l.Id = :id");
+    p.Id = :id");
         $this->db->bind(':id', $id, PDO::PARAM_INT);
         return $this->db->single();
     }
 
 
 
-    public function updateProduct($data)
+    public function updateProduct($POST)
     {
-        var_dump($data);
-        exit;
+        // $_POST = filter_input_array(INPUT_POST);
+        // $productId          = $_POST['id'];
+        // $houdbaarheidsdatum = $_POST['Date'];
+
         // var_dump($data);exit();
         // $this->db->query("UPDATE Product
         // JOIN ProductPerLeverancier ON ProductPerLeverancier.ProductId = Product.Id
@@ -107,11 +109,11 @@ class Leverancier
         // WHERE Product.Id = :Id;
         // ");
         $this->db->query("UPDATE Product
-                      SET Houdbaarheidsdatum = :Houdbaarheidsdatum
-                      WHERE Id = :Id");
+                      SET Houdbaarheidsdatum = :houdbaarheidsdatum
+                      WHERE Id = :id");
 
-        $this->db->bind(':Houdbaarheidsdatum', $data['datum'], PDO::PARAM_STR);
-        $this->db->bind(':Id', $data['id'], PDO::PARAM_INT);
+        $this->db->bind(':houdbaarheidsdatum',  $POST["Date"], PDO::PARAM_STR);
+        $this->db->bind(':id', $POST["id"], PDO::PARAM_INT);
 
         // $this->db->bind(':Date', $data['datum'], PDO::PARAM_STR);
         // $this->db->bind(':LeverancierNummer', $data['LeverancierNummer'], PDO::PARAM_STR);
