@@ -72,17 +72,48 @@ class Leverancier
     }
 
 
+    public function getupdatedetails($id)
+    {
+        $this->db->query("SELECT
+        l.Id AS LeverancierId,
+        l.Naam AS LeverancierNaam,
+        l.LeverancierNummer,
+        l.LeverancierType,
+        p.Id AS ProductId,
+        p.Naam AS ProductNaam,
+        p.SoortAllergie,
+        p.Barcode,
+        p.Houdbaarheidsdatum
+    FROM
+        Leverancier l
+        JOIN ProductPerLeverancier pl ON l.Id = pl.LeverancierId
+        JOIN Product p ON pl.ProductId = p.Id
+    WHERE
+        l.Id = :id");
+        $this->db->bind(':id', $id, PDO::PARAM_INT);
+        return $this->db->single();
+    }
+
+
 
     public function updateProduct($data)
     {
+        var_dump($data);
+        exit;
         // var_dump($data);exit();
+        // $this->db->query("UPDATE Product
+        // JOIN ProductPerLeverancier ON ProductPerLeverancier.ProductId = Product.Id
+        // SET Product.Houdbaarheidsdatum = :NewHoudbaarheidsdatum
+        // WHERE Product.Id = :Id;
+        // ");
         $this->db->query("UPDATE Product
-        JOIN ProductPerLeverancier ON ProductPerLeverancier.ProductId = Product.Id
-        SET Product.Houdbaarheidsdatum = :NewHoudbaarheidsdatum
-        WHERE Product.Id = :Id;
-        ");
+                      SET Houdbaarheidsdatum = :Houdbaarheidsdatum
+                      WHERE Id = :Id");
 
-        // $this->db->bind(':Naam', $data['Naam'], PDO::PARAM_STR);
+        $this->db->bind(':Houdbaarheidsdatum', $data['datum'], PDO::PARAM_STR);
+        $this->db->bind(':Id', $data['id'], PDO::PARAM_INT);
+
+        // $this->db->bind(':Date', $data['datum'], PDO::PARAM_STR);
         // $this->db->bind(':LeverancierNummer', $data['LeverancierNummer'], PDO::PARAM_STR);
         // $this->db->bind(':Tussenvoegsel', $data['Tussenvoegsel'], PDO::PARAM_STR);
         // $this->db->bind(':Kinderen', $data['Kinderen'], PDO::PARAM_INT);

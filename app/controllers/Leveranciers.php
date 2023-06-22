@@ -89,7 +89,7 @@ class Leveranciers extends Controller
         //     'Houdbaarheidsdatum' => $record->Houdbaarheidsdatum
         // ];
         $data = [
-            'title' => 'Update Klanten',
+            'title' => 'Update Product',
             'rows' => $rows,
             'rowz' => $rowz
         ];
@@ -124,6 +124,8 @@ class Leveranciers extends Controller
 
     public function update($id = null)
     {
+        // var_dump($id);
+        // exit;
         /**
          * Controleer of er gepost wordt vanuit de view update.php
          */
@@ -136,15 +138,15 @@ class Leveranciers extends Controller
             $this->leverancierModel->updateProduct($_POST);
 
             header("Location: " . URLROOT . "/leverancier/update");
+        } else {
+
+            $record = $this->leverancierModel->getupdatedetails($id);
+            // var_dump($record);
+
+
+            $data = ['title' => 'Wijzig Product', 'datum' => $record->Houdbaarheidsdatum, 'id' => $id];
+            $this->view('leveranciers/update', $data);
         }
-
-        $record = $this->leverancierModel->getProduct($id);
-
-        $data = [
-            'title' => 'Wijzig Product',
-            'datum' => $record->Houdbaarheidsdatum
-        ];
-        $this->view('leveranciers/update', $data);
     }
 
     // public function delete($id)
