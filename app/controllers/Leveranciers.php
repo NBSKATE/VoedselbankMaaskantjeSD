@@ -133,9 +133,9 @@ class Leveranciers extends Controller
              */
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
-            $this->leverancierModel->updateLeverancier($_POST);
+            $this->leverancierModel->updateProduct($_POST);
 
-            header("Location: " . URLROOT . "/leverancier/index");
+            header("Location: " . URLROOT . "/leverancier/update");
         }
 
         $record = $this->leverancierModel->getProduct($id);
