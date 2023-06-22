@@ -31,7 +31,7 @@ CREATE TABLE Persoon (
   IsActief BOOLEAN,
   Opmerking VARCHAR(255) NULL,
   DatumAangemaakt DATETIME NOT NULL,
-  DatumGewijzigd DATETIME NOT NULL
+  DatumGewijzigd DATETIME NOT NULL,
   PRIMARY KEY (Id),
   FOREIGN KEY (GezinId) REFERENCES Gezin(Id)
 );
