@@ -27,12 +27,51 @@ class Leverancier
         return $this->db->resultSet();
     }
 
-    public function getLeverancier($id)
+    // public function getProduct($id)
+    // {
+    //     $this->db->query("SELECT
+    //     l.Id AS LeverancierId,
+    //     l.Naam,
+    //     l.LeverancierNummer,
+    //     l.LeverancierType,
+    //     p.Id AS ProductId,
+    //     p.Naam,
+    //     p.SoortAllergie,
+    //     p.Barcode,
+    //     p.Houdbaarheidsdatum
+    // FROM
+    //     Leverancier l
+    //     JOIN ProductPerLeverancier pl ON l.Id = pl.LeverancierId
+    //     JOIN Product p ON pl.ProductId = p.Id
+    // WHERE
+    //     l.Id = :id");
+    //     $this->db->bind(':id', $id, PDO::PARAM_INT);
+    //     return $this->db->single();
+    // }
+
+    public function getProduct($id)
     {
-        $this->db->query("SELECT * FROM klant WHERE Id = :id");
+        $this->db->query("SELECT
+        l.Id AS LeverancierId,
+        l.Naam AS LeverancierNaam,
+        l.LeverancierNummer,
+        l.LeverancierType,
+        p.Id AS ProductId,
+        p.Naam AS ProductNaam,
+        p.SoortAllergie,
+        p.Barcode,
+        p.Houdbaarheidsdatum
+    FROM
+        Leverancier l
+        JOIN ProductPerLeverancier pl ON l.Id = pl.LeverancierId
+        JOIN Product p ON pl.ProductId = p.Id
+    WHERE
+        l.Id = :id");
         $this->db->bind(':id', $id, PDO::PARAM_INT);
-        return $this->db->single();
+        return $this->db->resultSet();
     }
+
+
 
     public function updateLeverancier($data)
     {
@@ -47,7 +86,7 @@ class Leverancier
                           WHERE Id = :Id");
 
         $this->db->bind(':Naam', $data['Naam'], PDO::PARAM_STR);
-        $this->db->bind(':Achternaam', $data['Achternaam'], PDO::PARAM_STR);
+        $this->db->bind(':LeverancierNummer', $data['LeverancierNummer'], PDO::PARAM_STR);
         $this->db->bind(':Tussenvoegsel', $data['Tussenvoegsel'], PDO::PARAM_STR);
         $this->db->bind(':Kinderen', $data['Kinderen'], PDO::PARAM_INT);
         $this->db->bind(':Babies', $data['Babies'], PDO::PARAM_INT);

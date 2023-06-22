@@ -1,25 +1,51 @@
-<h3><?= $data['title']; ?></h3>
+<!doctype html>
+<html lang="en">
 
-<form action="<?= URLROOT; ?>/leveranciers/productDetails" method="post">
-    <table>
-        <tbody>
-            <tr>
-                <td>Naam:</td>
-                <td><input type="text" name="Naam" id="Naam" value="<?= $data['Naam']; ?>"></td>
-            </tr>
-            <tr>
-                <td>Leveranciernummer:</td>
-                <td><input type="text" name="Tussenvoegsel" id="Tussenvoegsel" value="<?= $data['Tussenvoegsel']; ?>"></td>
-            </tr>
-            <tr>
-                <td>Leveranciertype:</td>
-                <td><input type="text" name="Achternaam" id="Achternaam" value="<?= $data['Achternaam']; ?>"></td>
-            </tr>
-            <tr>
-                <td><input type="hidden" name="id" id="id" value="<?= $data['Id']; ?>"></td>
-                <td><input type="submit" name="submit" id="submit" value="Verstuur"></td>
-            </tr>
-        </tbody>
-    </table>
+<head>
 
-</form>
+    <title>Overzicht Leveranciers</title>
+
+    <link rel="stylesheet" href="nikocss.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <hr>
+            <div class="header">
+                <h1>Overzicht producten</h1>
+                <style>
+                    .header {
+                        display: flex;
+                        justify-content: space-between;
+                        padding: 10px;
+                    }
+                </style>
+            </div>
+            <hr>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+
+                <table class="">
+                    <thead>
+                        <tr>
+                            <th>Naam</th>
+                            <th>SoortAllergie</th>
+                            <th>Barcode</th>
+                            <th>Houdbaarheidsdatum</th>
+                    </thead>
+                    </tbody>
+                    <?= $data['rows']; ?>
+                </table>
+            </div>
+        </div>
+    </div>
+    <center>
+        <p><a href="<?= URLROOT; ?>/landingpages/index">terug naar landingpage</a></p>
+    </center>
+</body>
+
+</html>

@@ -41,17 +41,66 @@ class Leveranciers extends Controller
     }
 
     //
-    public function productDetails()
+    public function productDetails($id = null)
     {
-       echo"hoi";
+        $record = $this->leverancierModel->getProduct($id);
 
+        $rows = '';
+
+        foreach ($record as $items) {
+            $rows .= "<tr>
+                        <td>$items->LeverancierNaam</td>
+                        <td>$items->SoortAllergie</td>
+                        <td>$items->Barcode</td>
+                        <td>$items->Houdbaarheidsdatum</td>
+                        
+                        <td>
+                            <a href='" . URLROOT . "/leveranciers/productDetails/$items->LeverancierId'>Product Details</a>
+                        </td>                       
+                      </tr>";
+        }
+
+        // $data = [
+        //     'title' => 'Update Klanten',
+        //     'Id' => $record->LeverancierId,
+        //     'LNaam' => $record->LNaam,
+        //     'PNaam' => $record->PNaam,
+        //     'Leveranciernummer' => $record->LeverancierNummer,
+        //     'Barcode' => $record->Barcode,
+        //     'Houdbaarheidsdatum' => $record->Houdbaarheidsdatum
+        // ];
         $data = [
-            'title' => "Overzicht leveranciers",
-          
+            'title' => 'Update Klanten',
+            'rows' => $rows
         ];
+
         $this->view('leveranciers/productDetails', $data);
     }
+
     //    
+    // public function productDetails($id)
+    // {
+    //     $record = $this->leverancierModel->getProduct($id);
+
+    //     $rows = '';
+
+    //     foreach ($record as $item) {
+    //         $rows .= "<tr>
+    //                 <td>$item->ProductNaam</td>
+    //                 <td>$item->SoortAllergie</td>
+    //                 <td>$item->Barcode</td>
+    //                 <td>$item->Houdbaarheidsdatum</td>
+    //               </tr>";
+    //     }
+
+    //     $data = [
+    //         'title' => "Product Details",
+    //         'rows' => $rows
+    //     ];
+    //     $this->view('leveranciers/productDetails', $data);
+    // }
+
+    /////
 
     public function update($id = null)
     {
