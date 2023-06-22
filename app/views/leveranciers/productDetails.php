@@ -28,7 +28,17 @@
     <div class="container">
         <div class="row">
             <div class="col">
-
+                <table>
+                    <?= $data['rowz']; ?>
+                </table>
+            </div>
+        </div>
+    </div>
+    <br>
+    <hr>
+    <div class="container">
+        <div class="row">
+            <div class="col">
                 <table class="">
                     <thead>
                         <tr>
@@ -36,8 +46,8 @@
                             <th>SoortAllergie</th>
                             <th>Barcode</th>
                             <th>Houdbaarheidsdatum</th>
+                        </tr>
                     </thead>
-                    </tbody>
                     <?= $data['rows']; ?>
                 </table>
             </div>

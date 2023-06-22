@@ -46,19 +46,38 @@ class Leveranciers extends Controller
         $record = $this->leverancierModel->getProduct($id);
 
         $rows = '';
+        $rowz = '';
 
         foreach ($record as $items) {
-            $rows .= "<tr>
+            $rows .= "          
+                        <tr>
                         <td>$items->LeverancierNaam</td>
                         <td>$items->SoortAllergie</td>
                         <td>$items->Barcode</td>
                         <td>$items->Houdbaarheidsdatum</td>
                         
                         <td>
-                            <a href='" . URLROOT . "/leveranciers/productDetails/$items->LeverancierId'>Product Details</a>
+                            <a href='" . URLROOT . "/leveranciers/update/$items->LeverancierId'>wijzig product</a>
                         </td>                       
                       </tr>";
         }
+        $rowz .= " <table>
+            <tr>
+                <th>Naam</th>
+                <td>$items->ProductNaam</td>
+            </tr>
+            <tr>
+                <th>Leveranciernummer</th>
+                <td>$items->LeverancierNummer</td>
+            </tr>
+            <tr>
+                <th>Leveranciertype</th>
+                <td>$items->LeverancierType</td>
+            </tr>
+        </table>";
+
+
+
 
         // $data = [
         //     'title' => 'Update Klanten',
@@ -71,7 +90,8 @@ class Leveranciers extends Controller
         // ];
         $data = [
             'title' => 'Update Klanten',
-            'rows' => $rows
+            'rows' => $rows,
+            'rowz' => $rowz
         ];
 
         $this->view('leveranciers/productDetails', $data);
@@ -118,17 +138,11 @@ class Leveranciers extends Controller
             header("Location: " . URLROOT . "/leverancier/index");
         }
 
-        $record = $this->leverancierModel->getKlant($id);
+        $record = $this->leverancierModel->getProduct($id);
 
         $data = [
-            'title' => 'Update Leveranciers',
-            'Id' => $record->Id,
-            'Naam' => $record->Naam,
-            'Tussenvoegsel' => $record->Tussenvoegsel,
-            'Achternaam' => $record->Achternaam,
-            'Volwassenen' => $record->Volwassenen,
-            'Kinderen' => $record->Kinderen,
-            'Babies' => $record->Babies,
+            'title' => 'Wijzig Product',
+            'datum' => $record->Houdbaarheidsdatum
         ];
         $this->view('leveranciers/update', $data);
     }

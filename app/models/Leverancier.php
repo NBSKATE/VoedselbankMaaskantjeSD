@@ -73,24 +73,21 @@ class Leverancier
 
 
 
-    public function updateLeverancier($data)
+    public function updateProduct($data)
     {
         // var_dump($data);exit();
-        $this->db->query("UPDATE klant
-                          SET Naam = :Naam,
-                              Achternaam = :Achternaam,
-                              Tussenvoegsel = :Tussenvoegsel,
-                              Volwassenen = :Volwassenen,
-                              Kinderen = :Kinderen,
-                              Babies = :Babies
-                          WHERE Id = :Id");
+        $this->db->query("UPDATE Product
+        JOIN ProductPerLeverancier ON ProductPerLeverancier.ProductId = Product.Id
+        SET Product.Houdbaarheidsdatum = :NewHoudbaarheidsdatum
+        WHERE Product.Id = :Id;
+        ");
 
-        $this->db->bind(':Naam', $data['Naam'], PDO::PARAM_STR);
-        $this->db->bind(':LeverancierNummer', $data['LeverancierNummer'], PDO::PARAM_STR);
-        $this->db->bind(':Tussenvoegsel', $data['Tussenvoegsel'], PDO::PARAM_STR);
-        $this->db->bind(':Kinderen', $data['Kinderen'], PDO::PARAM_INT);
-        $this->db->bind(':Babies', $data['Babies'], PDO::PARAM_INT);
-        $this->db->bind(':Id', $data['id'], PDO::PARAM_INT);
+        // $this->db->bind(':Naam', $data['Naam'], PDO::PARAM_STR);
+        // $this->db->bind(':LeverancierNummer', $data['LeverancierNummer'], PDO::PARAM_STR);
+        // $this->db->bind(':Tussenvoegsel', $data['Tussenvoegsel'], PDO::PARAM_STR);
+        // $this->db->bind(':Kinderen', $data['Kinderen'], PDO::PARAM_INT);
+        // $this->db->bind(':Babies', $data['Babies'], PDO::PARAM_INT);
+        // $this->db->bind(':Id', $data['id'], PDO::PARAM_INT);
 
         return $this->db->execute();
     }
