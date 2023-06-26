@@ -55,6 +55,8 @@
                         <?= $data['rows']; ?>
                     </tbody>
                 </table>
+                <!-- make me a button that goes to voedselpakket/update -->
+                <a href="<?= URLROOT; ?>/voedselpakket/update" class="btn btn-primary">Voedselpakket toevoegen</a>
             </div>
         </div>
     </div>

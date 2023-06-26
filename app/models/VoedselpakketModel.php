@@ -26,5 +26,17 @@ class VoedselpakketModel
         return $this->db->resultSet();
     }
 
+    public function getVoedselpakketById($id)
+    {
+        $this->db->query('SELECT Voedselpakket.Pakketnummer, Voedselpakket.DatumSamenstelling ,Voedselpakket.DatumUitgifte, Voedselpakket.Status, ProductPerVoedselpakket.AantalProductEenheden
+            FROM Voedselpakket
+            JOIN ProductPerVoedselpakket ON Voedselpakket.Id = ProductPerVoedselpakket.VoedselpakketId
+            WHERE Voedselpakket.Id = :id
+        ');
+    
+        $this->db->bind(':id', $id);
+    
+        return $this->db->resultSet();
+    }
 
 }
